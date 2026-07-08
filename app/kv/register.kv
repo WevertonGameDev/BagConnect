@@ -1,0 +1,133 @@
+<RegisterScreen>:
+
+
+    MDBoxLayout:
+
+        orientation: "vertical"
+
+        padding: dp(40)
+
+        spacing: dp(20)
+
+
+
+        Widget
+
+
+
+        MDLabel:
+
+            text: "Criar conta"
+
+            halign: "center"
+
+            font_style: "H3"
+
+
+
+        MDLabel:
+
+            text: "Cadastre-se no BagConnect"
+
+            halign: "center"
+
+            theme_text_color: "Secondary"
+
+
+
+        MDCard:
+
+
+            orientation: "vertical"
+
+            padding: dp(25)
+
+            spacing: dp(15)
+
+            size_hint_y: None
+
+            height: dp(420)
+
+            radius: [20]
+
+            elevation: 8
+
+
+
+            MDTextField:
+
+                id: name
+
+                hint_text: "Nome completo"
+
+                icon_left: "account"
+
+
+
+            MDTextField:
+
+                id: email
+
+                hint_text: "Email"
+
+                icon_left: "email"
+
+
+
+            MDTextField:
+
+                id: password
+
+                hint_text: "Senha"
+
+                password: True
+
+                icon_left: "lock"
+
+
+
+            MDTextField:
+
+                id: confirm_password
+
+                hint_text: "Confirmar senha"
+
+                password: True
+
+                icon_left: "lock-check"
+
+
+
+            MDRaisedButton:
+
+                text: "CADASTRAR"
+
+                size_hint_x: 1
+
+
+                on_release:
+
+                    root.cadastrar()
+
+
+
+        MDTextButton:
+
+
+            text: "Já tenho uma conta"
+
+
+            pos_hint:
+
+                {
+                "center_x": .5
+                }
+
+
+            on_release:
+
+                root.voltar_login()
+
+
+
+        Widget

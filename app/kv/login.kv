@@ -1,0 +1,167 @@
+<LoginScreen>:
+
+
+    md_bg_color: 0.96, 0.97, 0.98, 1
+
+
+    MDBoxLayout:
+
+        orientation: "vertical"
+
+        padding: dp(35)
+
+        spacing: dp(15)
+
+
+
+        Widget:
+
+
+
+        MDLabel:
+
+            text: "BagConnect"
+
+            halign: "center"
+
+            font_style: "H3"
+
+            bold: True
+
+            theme_text_color: "Primary"
+
+
+
+        MDLabel:
+
+            text: "Conectando você ao suporte"
+
+            halign: "center"
+
+            font_style: "Subtitle1"
+
+            theme_text_color: "Secondary"
+
+
+
+        Widget:
+
+            size_hint_y: .2
+
+
+
+        MDCard:
+
+            orientation: "vertical"
+
+            padding: dp(30)
+
+            spacing: dp(20)
+
+            size_hint_y: None
+
+            height: dp(360)
+
+            size_hint_x: .95
+
+            pos_hint:
+                {
+                "center_x": .5
+                }
+
+
+            radius: [25]
+
+            elevation: 10
+
+
+
+            MDLabel:
+
+                text: "Entrar"
+
+                font_style: "H5"
+
+                bold: True
+
+                size_hint_y: None
+
+                height: dp(40)
+
+
+
+            MDTextField:
+
+                id: email
+
+                hint_text: "Email"
+
+                icon_left: "email-outline"
+
+                mode: "rectangle"
+
+
+
+            MDTextField:
+
+                id: password
+
+                hint_text: "Senha"
+
+                password: True
+
+                icon_left: "lock-outline"
+
+                mode: "rectangle"
+
+
+
+            MDRaisedButton:
+
+
+                text: "ENTRAR"
+
+                size_hint_x: 1
+
+                height: dp(45)
+
+
+                on_release:
+
+                    root.login()
+
+
+
+            MDTextButton:
+
+
+                text: "Criar uma conta"
+
+                pos_hint:
+
+                    {
+                    "center_x": .5
+                    }
+
+
+                on_release:
+
+                    root.abrir_cadastro()
+
+
+
+        Widget:
+
+
+
+        MDLabel:
+
+            text: "© BagConnect"
+
+            halign: "center"
+
+            theme_text_color: "Secondary"
+
+
+
+        Widget:
