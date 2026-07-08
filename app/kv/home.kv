@@ -1,0 +1,149 @@
+<HomeScreen>:
+
+
+    md_bg_color: 0.96, 0.97, 0.98, 1
+
+
+
+    MDBoxLayout:
+
+        orientation: "vertical"
+
+        padding: dp(25)
+
+        spacing: dp(20)
+
+
+
+        MDLabel:
+
+            text: "Olá, Cliente 👋"
+
+            font_style: "H4"
+
+            bold: True
+
+            size_hint_y: None
+
+            height: dp(60)
+
+
+
+        MDLabel:
+
+            text: "Bem-vindo ao BagConnect"
+
+            theme_text_color: "Secondary"
+
+            size_hint_y: None
+
+            height: dp(35)
+
+
+
+        MDCard:
+
+
+            orientation: "vertical"
+
+            padding: dp(25)
+
+            spacing: dp(10)
+
+            size_hint_y: None
+
+            height: dp(160)
+
+            radius: [25]
+
+            elevation: 8
+
+
+
+            MDLabel:
+
+                text: "Suporte"
+
+                font_style: "H5"
+
+                bold: True
+
+
+
+            MDLabel:
+
+                text: "Converse com nossa equipe de atendimento"
+
+                theme_text_color: "Secondary"
+
+
+
+            MDRaisedButton:
+
+                text: "ABRIR CHAT"
+
+                on_release:
+
+                    root.abrir_chat()
+
+
+
+
+        MDCard:
+
+
+            orientation: "vertical"
+
+            padding: dp(25)
+
+            spacing: dp(10)
+
+            size_hint_y: None
+
+            height: dp(160)
+
+            radius: [25]
+
+            elevation: 8
+
+
+
+            MDLabel:
+
+                text: "Minhas Bags"
+
+                font_style: "H5"
+
+                bold: True
+
+
+
+            MDLabel:
+
+                text: "Consulte informações das suas bags"
+
+                theme_text_color: "Secondary"
+
+
+
+            MDRaisedButton:
+
+                text: "CONSULTAR"
+
+                on_release:
+
+                    root.abrir_bags()
+
+
+
+        Widget:
+
+
+
+        MDLabel:
+
+            text: "BagConnect"
+
+            halign: "center"
+
+            theme_text_color: "Secondary"

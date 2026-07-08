@@ -5,6 +5,7 @@ from core.manager import ScreenManager
 
 from screens.login import LoginScreen
 from screens.register import RegisterScreen
+from screens.home import HomeScreen
 
 
 
@@ -12,6 +13,7 @@ class BagConnectApp(MDApp):
 
 
     def build(self):
+
 
         Builder.load_file(
             "kv/login.kv"
@@ -21,9 +23,13 @@ class BagConnectApp(MDApp):
             "kv/register.kv"
         )
 
+        Builder.load_file(
+            "kv/home.kv"
+        )
+
 
         self.theme_cls.primary_palette = "Blue"
-        self.theme_cls.accent_palette = "Cyan"
+
         self.theme_cls.theme_style = "Light"
 
 
@@ -42,6 +48,13 @@ class BagConnectApp(MDApp):
         manager.add_widget(
             RegisterScreen(
                 name="register"
+            )
+        )
+
+
+        manager.add_widget(
+            HomeScreen(
+                name="home"
             )
         )
 

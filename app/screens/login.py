@@ -30,6 +30,9 @@ class LoginScreen(MDScreen):
                 "Login realizado"
             )
 
+
+            self.manager.current = "home"
+
             # futuro:
             # self.manager.current = "home"
 
