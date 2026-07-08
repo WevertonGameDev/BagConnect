@@ -1,7 +1,7 @@
 # 🧳 Bag Connect
 
 <p align="center">
-  <img src="App/Assets/Images/logo.png" width="180">
+  <img src="app/assets/images/logo.png" width="180">
 </p>
 
 <p align="center">
