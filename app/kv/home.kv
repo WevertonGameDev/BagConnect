@@ -1,3 +1,5 @@
+#:kivy 2.0.0
+
 <HomeScreen>:
 
 
@@ -17,7 +19,7 @@
 
         MDLabel:
 
-            text: "Olá, Cliente 👋"
+            text: app.tr("home_ola")
 
             font_style: "H4"
 
@@ -31,7 +33,7 @@
 
         MDLabel:
 
-            text: "Bem-vindo ao BagConnect"
+            text: app.tr("home_bem_vindo")
 
             theme_text_color: "Secondary"
 
@@ -62,7 +64,7 @@
 
             MDLabel:
 
-                text: "Suporte"
+                text: app.tr("home_suporte")
 
                 font_style: "H5"
 
@@ -72,7 +74,7 @@
 
             MDLabel:
 
-                text: "Converse com nossa equipe de atendimento"
+                text: app.tr("home_suporte_texto")
 
                 theme_text_color: "Secondary"
 
@@ -80,7 +82,7 @@
 
             MDRaisedButton:
 
-                text: "ABRIR CHAT"
+                text: app.tr("home_botao_chat")
 
                 on_release:
 
@@ -110,7 +112,7 @@
 
             MDLabel:
 
-                text: "Minhas Bags"
+                text: app.tr("home_bags")
 
                 font_style: "H5"
 
@@ -120,7 +122,7 @@
 
             MDLabel:
 
-                text: "Consulte informações das suas bags"
+                text: app.tr("home_bags_texto")
 
                 theme_text_color: "Secondary"
 
@@ -128,7 +130,7 @@
 
             MDRaisedButton:
 
-                text: "CONSULTAR"
+                text: app.tr("home_botao_bags")
 
                 on_release:
 
@@ -142,7 +144,7 @@
 
         MDLabel:
 
-            text: "BagConnect"
+            text: app.tr("app_nome")
 
             halign: "center"
 

@@ -1,3 +1,5 @@
+#:kivy 2.0.0
+
 <LoginScreen>:
 
 
@@ -20,7 +22,7 @@
 
         MDLabel:
 
-            text: "BagConnect"
+            text: app.tr("app_nome")
 
             halign: "center"
 
@@ -34,7 +36,7 @@
 
         MDLabel:
 
-            text: "Conectando você ao suporte"
+            text: app.tr("login_subtitulo")
 
             halign: "center"
 
@@ -78,7 +80,7 @@
 
             MDLabel:
 
-                text: "Entrar"
+                text: app.tr("login_titulo")
 
                 font_style: "H5"
 
@@ -94,7 +96,7 @@
 
                 id: email
 
-                hint_text: "Email"
+                hint_text: app.tr("campo_email")
 
                 icon_left: "email-outline"
 
@@ -106,7 +108,7 @@
 
                 id: password
 
-                hint_text: "Senha"
+                hint_text: app.tr("campo_senha")
 
                 password: True
 
@@ -119,7 +121,7 @@
             MDRaisedButton:
 
 
-                text: "ENTRAR"
+                text: app.tr("login_botao")
 
                 size_hint_x: 1
 
@@ -135,7 +137,7 @@
             MDTextButton:
 
 
-                text: "Criar uma conta"
+                text: app.tr("criar_conta")
 
                 pos_hint:
 
@@ -156,7 +158,7 @@
 
         MDLabel:
 
-            text: "© BagConnect"
+            text: app.tr("rodape_app")
 
             halign: "center"
 

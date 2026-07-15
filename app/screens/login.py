@@ -1,3 +1,4 @@
+from kivy.app import App
 from kivymd.uix.screen import MDScreen
 from kivymd.toast import toast
 
@@ -27,7 +28,7 @@ class LoginScreen(MDScreen):
         if result:
 
             toast(
-                "Login realizado"
+                App.get_running_app().tr("toast_login_realizado")
             )
 
 
@@ -40,7 +41,7 @@ class LoginScreen(MDScreen):
         else:
 
             toast(
-                "Informe email e senha"
+                App.get_running_app().tr("toast_login_erro")
             )
 
 

@@ -1,3 +1,5 @@
+#:kivy 2.0.0
+
 <RegisterScreen>:
 
 
@@ -17,7 +19,7 @@
 
         MDLabel:
 
-            text: "Criar conta"
+            text: app.tr("cadastro_titulo")
 
             halign: "center"
 
@@ -27,7 +29,7 @@
 
         MDLabel:
 
-            text: "Cadastre-se no BagConnect"
+            text: app.tr("cadastro_subtitulo")
 
             halign: "center"
 
@@ -58,7 +60,7 @@
 
                 id: name
 
-                hint_text: "Nome completo"
+                hint_text: app.tr("campo_nome")
 
                 icon_left: "account"
 
@@ -68,7 +70,7 @@
 
                 id: email
 
-                hint_text: "Email"
+                hint_text: app.tr("campo_email")
 
                 icon_left: "email"
 
@@ -78,7 +80,7 @@
 
                 id: password
 
-                hint_text: "Senha"
+                hint_text: app.tr("campo_senha")
 
                 password: True
 
@@ -90,7 +92,7 @@
 
                 id: confirm_password
 
-                hint_text: "Confirmar senha"
+                hint_text: app.tr("campo_confirmar_senha")
 
                 password: True
 
@@ -100,7 +102,7 @@
 
             MDRaisedButton:
 
-                text: "CADASTRAR"
+                text: app.tr("cadastro_botao")
 
                 size_hint_x: 1
 
@@ -114,7 +116,7 @@
         MDTextButton:
 
 
-            text: "Já tenho uma conta"
+            text: app.tr("ja_tenho_conta")
 
 
             pos_hint:

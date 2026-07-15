@@ -2,6 +2,7 @@ from kivymd.app import MDApp
 from kivy.lang import Builder
 
 from core.manager import ScreenManager
+from core.idioma import Tradutor
 
 from screens.login import LoginScreen
 from screens.register import RegisterScreen
@@ -10,6 +11,15 @@ from screens.home import HomeScreen
 
 
 class BagConnectApp(MDApp):
+
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.tradutor = Tradutor()
+
+
+    def tr(self, chave, valor_padrao=None):
+        return self.tradutor.traduzir(chave, valor_padrao)
 
 
     def build(self):

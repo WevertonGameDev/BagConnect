@@ -1,3 +1,4 @@
+from kivy.app import App
 from kivymd.uix.screen import MDScreen
 from kivymd.toast import toast
 
@@ -21,7 +22,7 @@ class RegisterScreen(MDScreen):
         if not name or not email or not password:
 
             toast(
-                "Preencha todos os campos"
+                App.get_running_app().tr("toast_preencha_campos")
             )
 
             return
@@ -30,7 +31,7 @@ class RegisterScreen(MDScreen):
         if password != confirm:
 
             toast(
-                "As senhas não conferem"
+                App.get_running_app().tr("toast_senhas_nao_conferem")
             )
 
             return
@@ -46,7 +47,7 @@ class RegisterScreen(MDScreen):
         if result:
 
             toast(
-                "Cadastro realizado"
+                App.get_running_app().tr("toast_cadastro_realizado")
             )
 
             self.manager.current = "login"
@@ -55,7 +56,7 @@ class RegisterScreen(MDScreen):
         else:
 
             toast(
-                "Erro ao cadastrar"
+                App.get_running_app().tr("toast_erro_cadastrar")
             )
 
 
