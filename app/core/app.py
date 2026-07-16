@@ -2,12 +2,13 @@ from kivymd.app import MDApp
 from kivy.lang import Builder
 
 from core.manager import ScreenManager
-from core.idioma import Tradutor
+from core.idioma import Tradutor 
 
 from screens.login import LoginScreen
 from screens.register import RegisterScreen
 from screens.home import HomeScreen
 
+from widgets.drawer import Drawer
 
 
 class BagConnectApp(MDApp):
@@ -24,6 +25,9 @@ class BagConnectApp(MDApp):
 
     def build(self):
 
+        Builder.load_file(
+            "widgets/drawer.kv"
+        )
 
         Builder.load_file(
             "kv/login.kv"
