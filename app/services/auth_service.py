@@ -1,43 +1,79 @@
+from models.user import User
+from services.database import Database
+
+
 class AuthService:
 
 
+    def register(self, usuario, email, senha):
+        db = Database()
 
-    def login(
-        self,
-        email,
-        password
-    ):
+        try:
+            db.cursor.execute(
+                """
+                INSERT INTO usuarios
+                (
+                    usuario,
+                    email,
+                    senha
+                )
 
+                VALUES (?, ?, ?)
 
-        if email and password:
+                """,
+                (
+                    usuario,
+                    email,
+                    senha
+                )
+            )
 
+            db.connection.commit()
             return True
 
 
-        return False
+        except Exception as erro:
+            print("Erro ao cadastrar:", erro)
+            return False
+
+        finally:
+            db.fechar()
 
 
+    def login(self, email, senha):
+        db = Database()
 
-    def register(
-        self,
-        name,
-        email,
-        password
-    ):
+        try:
+            db.cursor.execute(
+                """
+                SELECT *
+                FROM usuarios
+                WHERE email = ?
+                AND senha = ?
+                """,
+                (
+                    email,
+                    senha
+                )
+            )
 
+            usuario = db.cursor.fetchone()
 
-        """
-        Futuramente:
+            if usuario:
+                return User(
+                            id=usuario[0],
+                            usuario=usuario[1],
+                            email=usuario[2],
+                            senha=usuario[3],
+                            cpf=usuario[4],
+                            passageiro_id=usuario[5]
+                        )
 
-        Firebase Authentication
-        Firestore users collection
+            return None
 
-        """
+        except Exception as erro:
+            print("Erro no login:", erro)
+            return None
 
-
-        if name and email and password:
-
-            return True
-
-
-        return False
+        finally:
+            db.fechar()

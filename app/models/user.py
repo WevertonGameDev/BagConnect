@@ -1,22 +1,18 @@
 class User:
 
-
     def __init__(
         self,
-        name,
-        email
+        id=None,
+        usuario=None,
+        email=None,
+        senha=None,
+        cpf=None,
+        passageiro_id=None
     ):
 
-        self.name = name
+        self.id = id
+        self.usuario = usuario
         self.email = email
-
-
-
-    def to_dict(self):
-
-        return {
-
-            "name": self.name,
-            "email": self.email
-
-        }
+        self.senha = senha
+        self.cpf = cpf
+        self.passageiro_id = passageiro_id
