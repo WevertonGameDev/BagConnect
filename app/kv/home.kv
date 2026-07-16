@@ -8,7 +8,6 @@
     FloatLayout:
 
         # CONTEÚDO PRINCIPAL
-
         MDBoxLayout:
             orientation: "vertical"
             size_hint: 1, 1
@@ -44,7 +43,7 @@
 
 
                         MDLabel:
-                            text: f"Olá, {root.nome_usuario}!"
+                            text: f"{app.tr('home_ola')}, {root.nome_usuario}!"
                             font_style: "H4"
                             bold: True
                             adaptive_height: True
@@ -67,7 +66,6 @@
                         MDSeparator:
 
                         # CARD BAGAGENS
-
                         MDCard:
 
                             size_hint_y: None
@@ -111,7 +109,6 @@
                                         root.abrir_bags()
 
                         # CARD SUPORTE
-
                         MDCard:
 
                             size_hint_y: None
@@ -164,7 +161,6 @@
                             height: dp(20)
 
         # OVERLAY ESCURO
-
         Button:
             id: overlay
 
@@ -184,8 +180,8 @@
                 root.fechar_menu()
 
         # DRAWER
-
         Drawer:
+
             id: drawer
 
             x: -self.width
@@ -193,3 +189,5 @@
             y: 0
 
             size_hint: None, 1
+
+            disabled: not root.menu_aberto

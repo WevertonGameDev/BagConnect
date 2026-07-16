@@ -110,7 +110,7 @@ Essa organização facilita a manutenção, escalabilidade e colaboração entre
 - [x] Navegação por Telas
 - [x] Tema Personalizado
 - [x] Internacionalização (Idiomas)
-- [ ] Banco de Dados
+- [x] Banco de Dados
 - [ ] Consulta de Bagagens
 - [ ] Atendimento Online
 - [ ] Recuperação de Senha
@@ -153,12 +153,12 @@ Projeto desenvolvido pelos alunos do curso de **Programador de Sistemas** do **Q
 - Weverton Alves
 
 ### Frontend
-- Nome
-- Nome
+- Miguel Ng
+- João
 
 ### Backend
-- Nome
-- Nome
+- Marcelo
+- Felipe
 
 ---
 

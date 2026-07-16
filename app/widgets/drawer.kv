@@ -13,137 +13,146 @@
     padding: dp(18)
     spacing: dp(10)
 
-    # Botão Fechar
 
+
+    # CABEÇALHO
     MDBoxLayout:
-        adaptive_height: True
-
-        Widget:
-
-        MDIconButton:
-            icon: "close"
-            theme_text_color: "Custom"
-            text_color: 0.90, 0.30, 0.30, 1
-            on_release:
-                app.root.get_screen("home").fechar_menu()
-
-    # Avatar
-
-    FitImage:
-        source: root.foto
-
-        size_hint: None, None
-        size: dp(90), dp(90)
-
-        radius: [45]
-
-        pos_hint:
-            {"center_x": .5}
-
-    # Nome
-
-    MDLabel:
-        text: root.nome
-
-        halign: "center"
-
-        bold: True
-
-        font_style: "H6"
+        orientation: "vertical"
 
         adaptive_height: True
 
-    # Email
+        spacing: dp(10)
 
-    MDLabel:
-        text: root.email
 
-        halign: "center"
+        MDBoxLayout:
+            adaptive_height: True
 
-        adaptive_height: True
+            Widget:
 
-        theme_text_color: "Secondary"
-
-    Widget:
-        size_hint_y: None
-        height: dp(10)
-
-    MDSeparator:
-
-    # HOME (selecionado)
-
-    MDCard:
-
-        elevation: 0
-
-        radius: [10]
-
-        md_bg_color: 0.92, 0.96, 1, 1
-
-        size_hint_y: None
-
-        height: dp(48)
-
-        OneLineIconListItem:
-
-            text: "Home"
-
-            divider: None
-
-            theme_text_color: "Custom"
-
-            text_color: 0.10, 0.35, 0.80, 1
-
-            IconLeftWidget:
-
-                icon: "home"
+            MDIconButton:
+                icon: "close"
 
                 theme_text_color: "Custom"
 
-                text_color: 0.10, 0.35, 0.80, 1
+                text_color: .90, .30, .30, 1
 
-    # ===========================
+                on_release:
+                    app.root.get_screen("home").fechar_menu()
 
-    OneLineIconListItem:
 
-        text: "Bagagens"
+        FitImage:
+            source: root.foto
 
-        IconLeftWidget:
+            size_hint: None, None
 
-            icon: "bag-suitcase"
+            size: dp(90), dp(90)
 
-    OneLineIconListItem:
+            radius: [45]
 
-        text: "Suporte"
+            pos_hint:
+                {"center_x": .5}
 
-        IconLeftWidget:
+        MDLabel:
+            text: root.nome
 
-            icon: "headset"
+            halign: "center"
 
-    OneLineIconListItem:
+            bold: True
 
-        text: "Perfil"
+            font_style: "H6"
 
-        IconLeftWidget:
+            adaptive_height: True
 
-            icon: "account"
+        MDLabel:
+            text: root.email
 
-    Widget:
+            halign: "center"
+
+            adaptive_height: True
+
+            theme_text_color: "Secondary"
 
     MDSeparator:
 
-    OneLineIconListItem:
 
-        text: "Configurações"
 
-        IconLeftWidget:
+    # MENU (ROLÁVEL)
+    ScrollView:
+        do_scroll_x: False
+        bar_width: dp(3)
 
-            icon: "cog"
+        MDBoxLayout:
+            orientation: "vertical"
 
-    OneLineIconListItem:
+            adaptive_height: True
 
-        text: "Sair"
+            spacing: dp(4)
 
-        IconLeftWidget:
 
-            icon: "logout"
+            MDCard:
+                elevation: 0
+
+                radius: [10]
+
+                md_bg_color: .92, .96, 1, 1
+
+                size_hint_y: None
+
+                height: dp(48)
+
+                OneLineIconListItem:
+                    text: app.tr("menu_home")
+
+                    divider: None
+
+                    theme_text_color: "Custom"
+
+                    text_color: .10, .35, .80, 1
+
+                    IconLeftWidget:
+                        icon: "home"
+
+                        theme_text_color: "Custom"
+
+                        text_color: .10, .35, .80, 1
+
+
+            OneLineIconListItem:
+                text: app.tr("menu_bagagens")
+
+                IconLeftWidget:
+                    icon: "bag-suitcase"
+
+            OneLineIconListItem:
+                text: app.tr("menu_suporte")
+
+                IconLeftWidget:
+                    icon: "headset"
+
+            OneLineIconListItem:
+                text: app.tr("menu_perfil")
+
+                IconLeftWidget:
+                    icon: "account"
+
+    MDSeparator:
+
+
+
+    # RODAPÉ
+    MDBoxLayout:
+        orientation: "vertical"
+
+        adaptive_height: True
+
+        OneLineIconListItem:
+            text: app.tr("menu_configuracoes")
+
+            IconLeftWidget:
+                icon: "cog"
+
+        OneLineIconListItem:
+            text: app.tr("menu_sair")
+
+            IconLeftWidget:
+                icon: "logout"

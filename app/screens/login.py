@@ -3,20 +3,18 @@ from kivymd.uix.screen import MDScreen
 from kivymd.toast import toast
 
 from services.auth_service import AuthService
-
+from core.session import Session
 
 
 class LoginScreen(MDScreen):
 
-
     auth = AuthService()
-
 
 
     def login(self):
 
-        email = self.ids.email.text
-        password = self.ids.password.text
+        email = self.ids.email.text.strip()
+        password = self.ids.password.text.strip()
 
 
         result = self.auth.login(
@@ -27,21 +25,26 @@ class LoginScreen(MDScreen):
 
         if result:
 
+            # Salva o usuário que acabou de logar
+            Session.salvar_usuario(result)
+
+
             toast(
-                App.get_running_app().tr("toast_login_realizado")
+                App.get_running_app().tr(
+                    "toast_login_realizado"
+                )
             )
 
 
             self.manager.current = "home"
 
-            # futuro:
-            # self.manager.current = "home"
-
 
         else:
 
             toast(
-                App.get_running_app().tr("toast_login_erro")
+                App.get_running_app().tr(
+                    "toast_login_erro"
+                )
             )
 
 

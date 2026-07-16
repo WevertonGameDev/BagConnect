@@ -2,22 +2,40 @@ from kivymd.uix.screen import MDScreen
 from kivy.properties import StringProperty
 from kivy.animation import Animation
 
+from core.session import Session
+
 
 class HomeScreen(MDScreen):
 
     nome_usuario = StringProperty("Usuário")
+    email_usuario = StringProperty("")
 
     menu_aberto = False
 
+    # CARREGAR USUÁRIO LOGADO
+    def on_enter(self):
+        usuario = Session.obter_usuario()
+
+        if usuario:
+            self.nome_usuario = usuario.usuario
+            self.email_usuario = usuario.email
+            
+        else:
+            self.nome_usuario = "Usuário"
+            self.email_usuario = "usuario@gmail.com"
+        
+        self.ids.drawer.carregar_usuario()
+
     # MENU
-
     def abrir_menu(self):
-
         if self.menu_aberto:
             return
 
         drawer = self.ids.drawer
         overlay = self.ids.overlay
+
+        # ativa o drawer para receber toque
+        drawer.disabled = False
 
         overlay.disabled = False
 
@@ -36,6 +54,7 @@ class HomeScreen(MDScreen):
         ).start(overlay)
 
         self.menu_aberto = True
+
 
     def fechar_menu(self):
 
@@ -59,19 +78,25 @@ class HomeScreen(MDScreen):
         anim_drawer.start(drawer)
         anim_overlay.start(overlay)
 
+
         def finalizar(*args):
             overlay.disabled = True
             overlay.size_hint = (None, None)
             overlay.size = (0, 0)
 
-        anim_overlay.bind(on_complete=finalizar)
+            # impede o drawer invisível de bloquear os botões
+            drawer.disabled = True
 
+        anim_overlay.bind(
+            on_complete=finalizar
+        )
         self.menu_aberto = False
 
-    # BOTÕES
 
+    # BOTÕES
     def abrir_chat(self):
         print("Abrir Chat")
+
 
     def abrir_bags(self):
         print("Abrir Bagagens")
