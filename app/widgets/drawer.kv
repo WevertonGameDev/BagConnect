@@ -1,0 +1,149 @@
+#:import dp kivy.metrics.dp
+#:import FitImage kivymd.uix.fitimage.FitImage
+
+<Drawer>
+
+    orientation: "vertical"
+
+    md_bg_color: 1, 1, 1, 1
+
+    size_hint: None, 1
+    width: dp(280)
+
+    padding: dp(18)
+    spacing: dp(10)
+
+    # Botão Fechar
+
+    MDBoxLayout:
+        adaptive_height: True
+
+        Widget:
+
+        MDIconButton:
+            icon: "close"
+            theme_text_color: "Custom"
+            text_color: 0.90, 0.30, 0.30, 1
+            on_release:
+                app.root.get_screen("home").fechar_menu()
+
+    # Avatar
+
+    FitImage:
+        source: root.foto
+
+        size_hint: None, None
+        size: dp(90), dp(90)
+
+        radius: [45]
+
+        pos_hint:
+            {"center_x": .5}
+
+    # Nome
+
+    MDLabel:
+        text: root.nome
+
+        halign: "center"
+
+        bold: True
+
+        font_style: "H6"
+
+        adaptive_height: True
+
+    # Email
+
+    MDLabel:
+        text: root.email
+
+        halign: "center"
+
+        adaptive_height: True
+
+        theme_text_color: "Secondary"
+
+    Widget:
+        size_hint_y: None
+        height: dp(10)
+
+    MDSeparator:
+
+    # HOME (selecionado)
+
+    MDCard:
+
+        elevation: 0
+
+        radius: [10]
+
+        md_bg_color: 0.92, 0.96, 1, 1
+
+        size_hint_y: None
+
+        height: dp(48)
+
+        OneLineIconListItem:
+
+            text: "Home"
+
+            divider: None
+
+            theme_text_color: "Custom"
+
+            text_color: 0.10, 0.35, 0.80, 1
+
+            IconLeftWidget:
+
+                icon: "home"
+
+                theme_text_color: "Custom"
+
+                text_color: 0.10, 0.35, 0.80, 1
+
+    # ===========================
+
+    OneLineIconListItem:
+
+        text: "Bagagens"
+
+        IconLeftWidget:
+
+            icon: "bag-suitcase"
+
+    OneLineIconListItem:
+
+        text: "Suporte"
+
+        IconLeftWidget:
+
+            icon: "headset"
+
+    OneLineIconListItem:
+
+        text: "Perfil"
+
+        IconLeftWidget:
+
+            icon: "account"
+
+    Widget:
+
+    MDSeparator:
+
+    OneLineIconListItem:
+
+        text: "Configurações"
+
+        IconLeftWidget:
+
+            icon: "cog"
+
+    OneLineIconListItem:
+
+        text: "Sair"
+
+        IconLeftWidget:
+
+            icon: "logout"

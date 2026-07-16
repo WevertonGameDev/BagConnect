@@ -109,10 +109,10 @@ Essa organização facilita a manutenção, escalabilidade e colaboração entre
 - [x] Tela Inicial
 - [x] Navegação por Telas
 - [x] Tema Personalizado
+- [x] Internacionalização (Idiomas)
 - [ ] Banco de Dados
 - [ ] Consulta de Bagagens
 - [ ] Atendimento Online
-- [ ] Internacionalização (Idiomas)
 - [ ] Recuperação de Senha
 
 ---
