@@ -7,6 +7,7 @@ from core.idioma import Tradutor
 from screens.login import LoginScreen
 from screens.register import RegisterScreen
 from screens.home import HomeScreen
+from screens.profile import ProfileScreen
 
 from widgets.drawer import Drawer
 
@@ -41,6 +42,9 @@ class BagConnectApp(MDApp):
             "kv/home.kv"
         )
 
+        Builder.load_file(
+            "kv/profile.kv"
+        )
 
         self.theme_cls.primary_palette = "Blue"
 
@@ -72,5 +76,10 @@ class BagConnectApp(MDApp):
             )
         )
 
+        manager.add_widget(
+            ProfileScreen(
+                name="profile"
+            )
+        )
 
         return manager

@@ -129,8 +129,12 @@
                 IconLeftWidget:
                     icon: "headset"
 
+            # PERFIL
             OneLineIconListItem:
                 text: app.tr("menu_perfil")
+
+                on_release:
+                    app.root.get_screen("home").abrir_perfil()
 
                 IconLeftWidget:
                     icon: "account"

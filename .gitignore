@@ -1,4 +1,5 @@
 __pycache__/
+bagconnect.db
 *.pyc
 .venv/
 .env

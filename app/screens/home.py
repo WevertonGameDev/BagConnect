@@ -100,3 +100,8 @@ class HomeScreen(MDScreen):
 
     def abrir_bags(self):
         print("Abrir Bagagens")
+
+    
+    def abrir_perfil(self):
+        self.fechar_menu()
+        self.manager.current = "profile"

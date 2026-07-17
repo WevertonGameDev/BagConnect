@@ -1,0 +1,106 @@
+#:import dp kivy.metrics.dp
+#:import FitImage kivymd.uix.fitimage.FitImage
+
+<ProfileScreen>
+
+    md_bg_color: .96, .97, .98, 1
+
+    MDBoxLayout:
+
+        orientation: "vertical"
+
+        MDTopAppBar:
+
+            title: "Perfil"
+
+            elevation: 0
+
+            left_action_items:
+                [["arrow-left", lambda x: root.voltar()]]
+
+        ScrollView:
+
+            MDBoxLayout:
+
+                orientation: "vertical"
+
+                adaptive_height: True
+
+                padding: dp(24)
+
+                spacing: dp(18)
+
+                Widget:
+                    size_hint_y: None
+                    height: dp(20)
+
+                FitImage:
+
+                    source: root.foto
+
+                    size_hint: None, None
+
+                    size: dp(110), dp(110)
+
+                    radius: [55]
+
+                    pos_hint:
+                        {"center_x": .5}
+
+                MDLabel:
+
+                    text: root.usuario
+
+                    halign: "center"
+
+                    font_style: "H6"
+
+                    bold: True
+
+                MDLabel:
+
+                    text: root.email
+
+                    halign: "center"
+
+                    theme_text_color: "Secondary"
+
+                MDSeparator:
+
+                MDLabel:
+
+                    halign: "center"
+
+                    bold: True
+
+                    text:
+                        "Conectado como Passageiro" if root.conectado else "Não conectado"
+
+                MDRaisedButton:
+
+                    text:
+                        "Desconectar" if root.conectado else "Conectar"
+
+                    pos_hint:
+                        {"center_x": .5}
+
+                    md_bg_color:
+                        app.theme_cls.primary_color
+
+                    on_release:
+                        root.desconectar_passageiro() if root.conectado else root.conectar_passageiro()
+
+                Widget:
+
+        MDFloatingActionButton:
+
+            icon: "pencil"
+
+            pos_hint:
+                {"right": .96, "y": .03}
+
+            md_bg_color:
+                app.theme_cls.primary_color
+
+            on_release:
+                root.editar_perfil()

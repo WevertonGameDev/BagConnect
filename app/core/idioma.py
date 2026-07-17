@@ -48,7 +48,9 @@ class Tradutor:
                 "toast_preencha_campos": "Preencha todos os campos",
                 "toast_senhas_nao_conferem": "As senhas não conferem",
                 "toast_cadastro_realizado": "Cadastro realizado",
-                "toast_erro_cadastrar": "Erro ao cadastrar"
+                "toast_erro_cadastrar": "Erro ao cadastrar",
+                "toast_email_invalido": "Email inválido",
+                "toast_senha_curta": "A senha deve possuir no mínimo 6 caracteres"
             },
             "en": {
                 "app_nome": "BagConnect",
@@ -91,7 +93,9 @@ class Tradutor:
                 "toast_preencha_campos": "Please fill in all fields",
                 "toast_senhas_nao_conferem": "Passwords do not match",
                 "toast_cadastro_realizado": "Registration successful",
-                "toast_erro_cadastrar": "Registration error"
+                "toast_erro_cadastrar": "Registration error",
+                "toast_email_invalido": "Invalid email",
+                "toast_senha_curta": "Password must have at least 6 characters"
             },
         }
 
