@@ -13,8 +13,10 @@ from kivy.properties import (
     BooleanProperty
 )
 
-from services.user_service import UserService
+import re
+
 from core.session import Session
+from services.user_service import UserService
 
 
 class ProfileScreen(MDScreen):
@@ -30,8 +32,8 @@ class ProfileScreen(MDScreen):
     conectado = BooleanProperty(False)
 
     dialog = None
+    botao_salvar = None
 
-    service = UserService()
 
     def on_enter(self):
         user = Session.obter_usuario()
@@ -69,6 +71,7 @@ class ProfileScreen(MDScreen):
 
 
     def editar_perfil(self):
+
         self.campo_usuario = MDTextField(
             hint_text="Usuário",
             text=self.usuario
@@ -84,6 +87,18 @@ class ProfileScreen(MDScreen):
             text=self.cpf
         )
 
+        self.campo_usuario.bind(
+            text=self.verificar_alteracoes
+        )
+
+        self.campo_email.bind(
+            text=self.verificar_alteracoes
+        )
+
+        self.campo_cpf.bind(
+            text=self.verificar_alteracoes
+        )
+
         conteudo = MDBoxLayout(
             orientation="vertical",
             spacing="15dp",
@@ -94,6 +109,12 @@ class ProfileScreen(MDScreen):
         conteudo.add_widget(self.campo_email)
         conteudo.add_widget(self.campo_cpf)
 
+        self.botao_salvar = MDRaisedButton(
+            text="Salvar",
+            disabled=True,
+            on_release=self.salvar_edicao
+        )
+
         self.dialog = MDDialog(
             title="Editar Perfil",
             type="custom",
@@ -103,14 +124,72 @@ class ProfileScreen(MDScreen):
                     text="Cancelar",
                     on_release=lambda x: self.dialog.dismiss()
                 ),
-                MDRaisedButton(
-                    text="Salvar",
-                    on_release=self.salvar_edicao
-                )
+                self.botao_salvar
             ]
         )
 
         self.dialog.open()
+        self.verificar_alteracoes()
+
+
+    def verificar_alteracoes(self, *args):
+
+        # Validação visual do Email 
+        if self.validar_email(self.campo_email.text.strip()):
+            self.campo_email.error = False
+
+        else:
+            self.campo_email.error = True
+
+        # Validação visual do CPF 
+        cpf = (
+            self.campo_cpf.text
+            .replace(".", "")
+            .replace("-", "")
+            .strip()
+        )
+
+        if cpf == "" or self.validar_cpf(cpf):
+            self.campo_cpf.error = False
+
+        else:
+            self.campo_cpf.error = True
+
+
+        # Verifica alterações 
+        alterado = (
+            self.campo_usuario.text.strip() != self.usuario or
+            self.campo_email.text.strip() != self.email or
+            self.campo_cpf.text.strip() != self.cpf
+        )
+
+        valido = (
+            self.campo_usuario.text.strip() != "" and
+            not self.campo_email.error and
+            not self.campo_cpf.error
+        )
+
+
+        self.botao_salvar.disabled = not (alterado and valido)
+
+
+    def validar_email(self, email):
+
+        padrao = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+
+        return re.match(
+            padrao,
+            email
+        ) is not None
+
+
+    def validar_cpf(self, cpf):
+        cpf = cpf.replace(".", "").replace("-", "")
+
+        if cpf == "":
+            return True
+
+        return cpf.isdigit() and len(cpf) == 11
 
 
     def salvar_edicao(self, *args):
@@ -118,52 +197,52 @@ class ProfileScreen(MDScreen):
         email = self.campo_email.text.strip()
         cpf = self.campo_cpf.text.strip()
 
-        if not usuario or not email:
-            toast("Usuário e email são obrigatórios.")
+        if usuario == "":
+            toast("Informe um usuário.")
             return
 
-        usuario_logado = Session.obter_usuario()
+        if not self.validar_email(email):
+            toast("Email inválido.")
+            return
 
-        sucesso, resultado = self.service.editar_usuario(
-            usuario_logado.id,
+        if not self.validar_cpf(cpf):
+            toast("CPF inválido.")
+            return
+
+        service = UserService()
+
+        sucesso, retorno = service.editar_usuario(
+            Session.obter_usuario().id,
             usuario,
             email,
             cpf
         )
 
-        if not sucesso:
+        if sucesso:
 
-            if resultado == "usuario":
-                toast("Este usuário já está em uso.")
-                return
+            Session.salvar_usuario(retorno)
 
-            if resultado == "email":
+            self.usuario = retorno.usuario
+            self.email = retorno.email
+            self.cpf = retorno.cpf if retorno.cpf else ""
+
+            toast("Perfil atualizado.")
+
+            self.dialog.dismiss()
+
+        else:
+
+            if retorno == "usuario":
+                toast("Este usuário já existe.")
+
+            elif retorno == "email":
                 toast("Este email já está em uso.")
-                return
 
-            if resultado == "cpf":
-                toast("Este CPF já está em uso.")
-                return
+            elif retorno == "cpf":
+                toast("Este CPF já está cadastrado.")
 
-            toast("Erro ao atualizar usuário.")
-            return
-
-        # Atualiza a sessão
-        Session.salvar_usuario(resultado)
-
-        # Atualiza esta tela
-        self.on_enter()
-
-        # Atualiza Home
-        home = self.manager.get_screen("home")
-        home.on_enter()
-
-        # Atualiza Drawer
-        home.ids.drawer.carregar_usuario()
-
-        self.dialog.dismiss()
-
-        toast("Perfil atualizado com sucesso!")
+            else:
+                toast("Erro ao atualizar perfil.")
 
 
     def voltar(self):
