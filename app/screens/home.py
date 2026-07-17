@@ -99,7 +99,7 @@ class HomeScreen(MDScreen):
 
 
     def abrir_bags(self):
-        print("Abrir Bagagens")
+        self.manager.current = "find_bags"
 
     
     def abrir_perfil(self):
