@@ -47,40 +47,60 @@ O Bag Connect tem como objetivo oferecer um ambiente para:
 # 📁 Estrutura do Projeto
 
 ```
-Bag Connect/
+BagConnect/
 │
-├── App/
-│   ├── Assets/
-│   │   ├── Icons/
-│   │   └── Images/
+├── app/
 │   │
-│   ├── Core/
+│   ├── assets/
+│   │   ├── icons/
+│   │   └── images/
+│   │       ├── avatar_default.png
+│   │       ├── banner_home.jpeg
+│   │       └── logo.png
+│   │
+│   ├── core/
 │   │   ├── app.py
+│   │   ├── idioma.py
 │   │   ├── manager.py
+│   │   ├── session.py
 │   │   └── theme.py
 │   │
-│   ├── Kv/
+│   ├── data/
+│   │   └── bagconnect.db
+│   │
+│   ├── kv/
+│   │   ├── find_bags.kv
 │   │   ├── home.kv
 │   │   ├── login.kv
+│   │   ├── profile.kv
 │   │   └── register.kv
 │   │
-│   ├── Models/
+│   ├── models/
 │   │   ├── bag.py
+│   │   ├── passenger.py
 │   │   └── user.py
 │   │
-│   ├── Screens/
+│   ├── screens/
+│   │   ├── find_bags.py
 │   │   ├── home.py
 │   │   ├── login.py
+│   │   ├── profile.py
 │   │   └── register.py
 │   │
-│   ├── Services/
+│   ├── services/
 │   │   ├── auth_service.py
-│   │   └── database.py
+│   │   ├── bag_service.py
+│   │   ├── database.py
+│   │   └── user_service.py
 │   │
-│   ├── Widgets/
+│   ├── widgets/
+│   │   ├── drawer.kv
+│   │   └── drawer.py
 │   │
 │   └── main.py
 │
+├── .gitignore
+├── README.md
 └── requirements.txt
 ```
 
@@ -111,9 +131,10 @@ Essa organização facilita a manutenção, escalabilidade e colaboração entre
 - [x] Tema Personalizado
 - [x] Internacionalização (Idiomas)
 - [x] Banco de Dados
-- [ ] Consulta de Bagagens
+- [x] Consulta de Bagagens
 - [ ] Atendimento Online
 - [ ] Recuperação de Senha
+- [ ] Tradução
 
 ---
 
@@ -122,13 +143,13 @@ Essa organização facilita a manutenção, escalabilidade e colaboração entre
 Clone o repositório:
 
 ```bash
-git clone https://github.com/SEU-USUARIO/bag-connect.git
+git clone https://github.com/WevertonGameDev/BagConnect.git
 ```
 
 Entre na pasta:
 
 ```bash
-cd bag-connect
+cd BagConnect
 ```
 
 Instale as dependências:
@@ -140,7 +161,7 @@ pip install -r requirements.txt
 Execute o projeto:
 
 ```bash
-python App/main.py
+python app/main.py
 ```
 
 ---
@@ -169,12 +190,13 @@ Projeto desenvolvido pelos alunos do curso de **Programador de Sistemas** do **Q
 - Estrutura inicial
 - Navegação entre telas
 - Sistema de Login
-- Cadastro
+- Sistema de Cadastro
 
 ### Versão 2.0
 
 - Banco de Dados
 - Persistência de usuários
+- Perfil do Usuário
 - Melhorias visuais
 
 ### Versão 3.0

@@ -1,0 +1,155 @@
+#:import dp kivy.metrics.dp
+
+<FindBagsScreen>
+
+    md_bg_color: 0.96, 0.97, 0.98, 1
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "Minhas Bagagens"
+
+            elevation: 0
+
+            left_action_items:
+                [["arrow-left", lambda x: root.voltar()]]
+
+            right_action_items:
+                [["history", lambda x: root.abrir_historico()]]
+
+            md_bg_color: 0.96, 0.97, 0.98, 1
+
+        ScrollView:
+
+            AnchorLayout:
+                anchor_x: "center"
+                anchor_y: "top"
+
+                size_hint_y: None
+                height: content.height
+
+                MDBoxLayout:
+                    id: content
+
+                    orientation: "vertical"
+
+                    adaptive_height: True
+
+                    size_hint_x: None
+                    width: min(root.width - dp(40), dp(560))
+
+                    padding: dp(20)
+
+                    spacing: dp(18)
+
+                    MDSeparator:
+
+                    MDLabel:
+                        text: "CPF"
+                        bold: True
+                        adaptive_height: True
+
+                    MDTextField:
+                        id: cpf
+
+                        hint_text: "Digite seu CPF"
+
+                        helper_text: "Somente o proprietário da bagagem pode consultá-la."
+
+                        helper_text_mode: "on_focus"
+
+                    MDLabel:
+                        text: "Código da Bagagem"
+                        bold: True
+                        adaptive_height: True
+
+                    MDTextField:
+                        id: codigo
+
+                        hint_text: "Ex.: BAG000123"
+
+                        helper_text: "Código informado no despacho."
+
+                        helper_text_mode: "on_focus"
+
+                    MDRaisedButton:
+
+                        text: "Consultar Bagagem"
+
+                        size_hint_x: 1
+
+                        on_release:
+                            root.consultar_bagagem()
+
+                    MDSeparator:
+
+                    MDLabel:
+                        text: "Bag encontrada"
+
+                        font_style: "H6"
+
+                        bold: True
+
+                        adaptive_height: True
+
+                    MDCard:
+                        id: resultado_card
+
+                        orientation: "vertical"
+
+                        adaptive_height: True
+
+                        size_hint_y: None
+
+                        padding: dp(18)
+
+                        spacing: dp(10)
+
+                        radius: [18]
+
+                        elevation: 4
+
+                        opacity: 0
+
+                        MDLabel:
+                            id: bag_codigo
+
+                            text: ""
+
+                            bold: True
+
+                            adaptive_height: True
+
+                        MDSeparator:
+
+                        MDLabel:
+                            text: "Status"
+
+                            bold: True
+
+                            adaptive_height: True
+
+                        MDLabel:
+                            id: bag_status
+
+                            text: ""
+
+                            adaptive_height: True
+
+                            theme_text_color: "Secondary"
+
+                        MDSeparator:
+
+                        MDLabel:
+                            id: bag_descricao
+
+                            text: ""
+
+                            adaptive_height: True
+
+                            theme_text_color: "Secondary"
+
+                    Widget:
+                        size_hint_y: None
+                        height: dp(20)
