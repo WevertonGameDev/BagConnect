@@ -1,7 +1,7 @@
 #:kivy 2.0.0
+#:import dp kivy.metrics.dp
 
 <RegisterScreen>:
-
 
     MDBoxLayout:
 
@@ -11,11 +11,7 @@
 
         spacing: dp(20)
 
-
-
-        Widget
-
-
+        Widget:
 
         MDLabel:
 
@@ -25,8 +21,6 @@
 
             font_style: "H3"
 
-
-
         MDLabel:
 
             text: app.tr("cadastro_subtitulo")
@@ -35,10 +29,7 @@
 
             theme_text_color: "Secondary"
 
-
-
         MDCard:
-
 
             orientation: "vertical"
 
@@ -48,13 +39,11 @@
 
             size_hint_y: None
 
-            height: dp(420)
+            height: dp(450)
 
             radius: [20]
 
             elevation: 8
-
-
 
             MDTextField:
 
@@ -64,7 +53,8 @@
 
                 icon_left: "account"
 
-
+                on_text:
+                    root.validar_campos()
 
             MDTextField:
 
@@ -74,62 +64,96 @@
 
                 icon_left: "email"
 
+                on_text:
+                    root.validar_campos()
 
+            MDBoxLayout:
 
-            MDTextField:
+                adaptive_height: True
 
-                id: password
+                spacing: dp(5)
 
-                hint_text: app.tr("campo_senha")
+                MDTextField:
 
-                password: True
+                    id: password
 
-                icon_left: "lock"
+                    hint_text: app.tr("campo_senha")
 
+                    password: True
 
+                    icon_left: "lock"
 
-            MDTextField:
+                    on_text:
+                        root.validar_campos()
 
-                id: confirm_password
+                MDIconButton:
 
-                hint_text: app.tr("campo_confirmar_senha")
+                    id: btn_password
 
-                password: True
+                    icon: "eye-off"
 
-                icon_left: "lock-check"
+                    pos_hint:
+                        {"center_y": .5}
 
+                    on_release:
+                        root.mostrar_senha()
+                        self.icon = "eye" if self.icon == "eye-off" else "eye-off"
 
+            MDBoxLayout:
+
+                adaptive_height: True
+
+                spacing: dp(5)
+
+                MDTextField:
+
+                    id: confirm_password
+
+                    hint_text: app.tr("campo_confirmar_senha")
+
+                    password: True
+
+                    icon_left: "lock-check"
+
+                    on_text:
+                        root.validar_campos()
+
+                MDIconButton:
+
+                    id: btn_confirm
+
+                    icon: "eye-off"
+
+                    pos_hint:
+                        {"center_y": .5}
+
+                    on_release:
+                        root.mostrar_confirmar_senha()
+                        self.icon = "eye" if self.icon == "eye-off" else "eye-off"
 
             MDRaisedButton:
+
+                id: register_button
 
                 text: app.tr("cadastro_botao")
 
                 size_hint_x: 1
 
+                height: dp(46)
+
+                disabled: True
 
                 on_release:
-
                     root.cadastrar()
-
-
 
         MDTextButton:
 
-
             text: app.tr("ja_tenho_conta")
 
-
             pos_hint:
-
-                {
-                "center_x": .5
-                }
-
+                {"center_x": .5}
 
             on_release:
-
                 root.voltar_login()
 
-
-
-        Widget
+        Widget:
