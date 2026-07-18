@@ -1,0 +1,127 @@
+#:import dp kivy.metrics.dp
+
+<SettingsScreen>
+
+    md_bg_color: .96, .97, .98, 1
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: app.tr("configuracoes")
+            elevation: 0
+
+            left_action_items:
+                [["arrow-left", lambda x: root.voltar()]]
+
+        ScrollView:
+
+            MDBoxLayout:
+                orientation: "vertical"
+
+                adaptive_height: True
+
+                padding: dp(20)
+
+                spacing: dp(16)
+
+                Widget:
+                    size_hint_y: None
+                    height: dp(8)
+
+                MDCard:
+                    radius: [18]
+
+                    elevation: 3
+
+                    ripple_behavior: True
+
+                    size_hint_y: None
+
+                    height: dp(70)
+
+                    on_release:
+                        root.abrir_menu_idioma()
+
+                    MDBoxLayout:
+                        padding: dp(18)
+
+                        spacing: dp(16)
+
+                        MDIcon:
+                            icon: "translate"
+
+                            size_hint_x: None
+
+                            width: dp(30)
+
+                        MDLabel:
+                            text: app.tr("config_linguagem")
+
+                            font_style: "Subtitle1"
+
+                        MDLabel:
+                            text: root.idioma
+
+                            adaptive_width: True
+
+                            halign: "right"
+
+                            theme_text_color: "Secondary"
+
+                        MDIcon:
+                            icon: "chevron-down"
+
+                            size_hint_x: None
+
+                            width: dp(25)
+
+                MDCard:
+                    radius: [18]
+
+                    elevation: 3
+
+                    ripple_behavior: True
+
+                    size_hint_y: None
+
+                    height: dp(70)
+
+                    on_release:
+                        root.abrir_menu_tema()
+
+                    MDBoxLayout:
+                        padding: dp(18)
+                        spacing: dp(16)
+
+                        MDIcon:
+                            icon: "theme-light-dark"
+
+                            size_hint_x: None
+
+                            width: dp(30)
+
+                        MDLabel:
+                            text: app.tr("config_tema")
+
+                            font_style: "Subtitle1"
+
+                        MDLabel:
+                            text: root.tema
+
+                            adaptive_width: True
+
+                            halign: "right"
+
+                            theme_text_color: "Secondary"
+
+                        MDIcon:
+                            icon: "chevron-down"
+
+                            size_hint_x: None
+
+                            width: dp(25)
+
+                MDSeparator:
+
+                Widget:
