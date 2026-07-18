@@ -85,7 +85,8 @@ class Tradutor:
                 "toast_cadastro_realizado": "Cadastro realizado",
                 "toast_erro_cadastrar": "Erro ao cadastrar",
                 "toast_email_invalido": "Email inválido",
-                "toast_senha_curta": "A senha deve possuir no mínimo 6 caracteres"
+                "toast_senha_curta": "A senha deve possuir no mínimo 6 caracteres",
+                "tema_escuro": "Tema escuro"
             },
             "en": {
                 "app_nome": "BagConnect",
@@ -167,6 +168,7 @@ class Tradutor:
                 "toast_email_invalido": "Invalid email",
                 "toast_senha_curta": "Password must have at least 6 characters",
                 "home_bags": "My Bags"
+                "tema_escuro": "Dark theme"
             },
         }
 

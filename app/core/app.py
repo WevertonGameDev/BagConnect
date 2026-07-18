@@ -24,6 +24,8 @@ class BagConnectApp(MDApp):
     def tr(self, chave, valor_padrao=None):
         return self.tradutor.traduzir(chave, valor_padrao)
 
+    def alternar_tema(self, escuro):
+        self.theme_cls.theme_style = "Dark" if escuro else "Light"
 
     def build(self):
 
