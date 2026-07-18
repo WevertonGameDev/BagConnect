@@ -1,3 +1,4 @@
+from kivy.app import App
 from kivymd.uix.screen import MDScreen
 from kivy.properties import StringProperty
 from kivy.animation import Animation
@@ -7,7 +8,7 @@ from core.session import Session
 
 class HomeScreen(MDScreen):
 
-    nome_usuario = StringProperty("Usuário")
+    nome_usuario = StringProperty("")
     email_usuario = StringProperty("")
 
     menu_aberto = False
@@ -21,8 +22,8 @@ class HomeScreen(MDScreen):
             self.email_usuario = usuario.email
             
         else:
-            self.nome_usuario = "Usuário"
-            self.email_usuario = "usuario@gmail.com"
+            self.nome_usuario = App.get_running_app().tr("home_usuario_padrao")
+            self.email_usuario = App.get_running_app().tr("home_email_padrao")
         
         self.ids.drawer.carregar_usuario()
 
