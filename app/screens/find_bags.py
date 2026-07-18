@@ -6,6 +6,8 @@ from kivymd.uix.button import MDFlatButton
 
 from services.bag_service import BagService
 
+from kivy.app import App
+
 
 class FindBagsScreen(MDScreen):
 
@@ -28,8 +30,8 @@ class FindBagsScreen(MDScreen):
 
         if not cpf or not codigo:
             self.mostrar_dialogo(
-                "Atenção",
-                "Preencha o CPF e o código da bagagem."
+                App.get_running_app().tr("find_bags_atencao"),
+                App.get_running_app().tr("find_bags_preencha_campos")
             )
             return
 
@@ -43,8 +45,8 @@ class FindBagsScreen(MDScreen):
             self.ocultar_resultado()
 
             self.mostrar_dialogo(
-                "Bagagem não encontrada",
-                "Não foi encontrada nenhuma bagagem para os dados informados."
+                App.get_running_app().tr("find_bags_nao_encontrada"),
+                App.get_running_app().tr("find_bags_nao_encontrada_texto")
             )
 
             return
@@ -60,11 +62,11 @@ class FindBagsScreen(MDScreen):
         )
 
         self.ids.bag_status.text = (
-            f"Status: {bagagem['status']}"
+            f"{App.get_running_app().tr('find_bags_status_prefix')} {bagagem['status']}"
         )
 
         self.ids.bag_descricao.text = (
-            "Bagagem localizada com sucesso."
+            App.get_running_app().tr("find_bags_resultado_sucesso")
         )
 
         card = self.ids.resultado_card
@@ -103,7 +105,7 @@ class FindBagsScreen(MDScreen):
             text=texto,
             buttons=[
                 MDFlatButton(
-                    text="OK",
+                    text=App.get_running_app().tr("find_bags_ok"),
                     on_release=lambda x: self.dialog.dismiss()
                 )
             ]

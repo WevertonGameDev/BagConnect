@@ -8,7 +8,7 @@
         orientation: "vertical"
 
         MDTopAppBar:
-            title: "Minhas Bagagens"
+            title: app.tr("find_bags_titulo")
 
             elevation: 0
 
@@ -46,36 +46,36 @@
                     MDSeparator:
 
                     MDLabel:
-                        text: "CPF"
+                        text: app.tr("find_bags_cpf")
                         bold: True
                         adaptive_height: True
 
                     MDTextField:
                         id: cpf
 
-                        hint_text: "Digite seu CPF"
+                        hint_text: app.tr("find_bags_cpf_hint")
 
-                        helper_text: "Somente o proprietário da bagagem pode consultá-la."
+                        helper_text: app.tr("find_bags_cpf_helper")
 
                         helper_text_mode: "on_focus"
 
                     MDLabel:
-                        text: "Código da Bagagem"
+                        text: app.tr("find_bags_codigo")
                         bold: True
                         adaptive_height: True
 
                     MDTextField:
                         id: codigo
 
-                        hint_text: "Ex.: BAG000123"
+                        hint_text: app.tr("find_bags_codigo_hint")
 
-                        helper_text: "Código informado no despacho."
+                        helper_text: app.tr("find_bags_codigo_helper")
 
                         helper_text_mode: "on_focus"
 
                     MDRaisedButton:
 
-                        text: "Consultar Bagagem"
+                        text: app.tr("find_bags_botao_consultar")
 
                         size_hint_x: 1
 
@@ -85,7 +85,7 @@
                     MDSeparator:
 
                     MDLabel:
-                        text: "Bag encontrada"
+                        text: app.tr("find_bags_encontrada")
 
                         font_style: "H6"
 
@@ -124,7 +124,7 @@
                         MDSeparator:
 
                         MDLabel:
-                            text: "Status"
+                            text: app.tr("find_bags_status")
 
                             bold: True
 
