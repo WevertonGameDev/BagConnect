@@ -32,3 +32,11 @@ class Drawer(MDBoxLayout):
             )
 
             self.email = ""
+    
+
+    def abrir_home(self):
+        App.get_running_app().root.current = "home"
+
+
+    def abrir_perfil(self):
+        App.get_running_app().root.current = "profile"
