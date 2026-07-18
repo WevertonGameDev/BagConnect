@@ -139,8 +139,14 @@
 
         text: app.tr("menu_configuracoes")
 
-        IconLeftWidget:
+        on_release:
+            app.root.current = "settings"
 
+            app.root.get_screen(
+            "home"
+            ).fechar_menu()
+
+        IconLeftWidget:
             icon: "cog"
 
     MDBoxLayout:

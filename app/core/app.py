@@ -9,6 +9,7 @@ from screens.register import RegisterScreen
 from screens.home import HomeScreen
 from screens.profile import ProfileScreen
 from screens.find_bags import FindBagsScreen
+from screens.settings import SettingsScreen
 
 from widgets.drawer import Drawer
 
@@ -53,6 +54,10 @@ class BagConnectApp(MDApp):
             "kv/find_bags.kv"
         )
 
+        Builder.load_file(
+            "kv/settings.kv"
+        )
+
         self.theme_cls.primary_palette = "Blue"
 
         self.theme_cls.theme_style = "Light"
@@ -94,5 +99,11 @@ class BagConnectApp(MDApp):
                 name="find_bags"
             )
         )
+
+        manager.add_widget(
+            SettingsScreen(
+                name="settings"
+            )
+        )   
 
         return manager
