@@ -167,7 +167,7 @@ class Tradutor:
                 "toast_erro_cadastrar": "Registration error",
                 "toast_email_invalido": "Invalid email",
                 "toast_senha_curta": "Password must have at least 6 characters",
-                "home_bags": "My Bags"
+                "home_bags": "My Bags",
                 "tema_escuro": "Dark theme"
             },
         }
