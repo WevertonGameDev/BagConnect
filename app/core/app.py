@@ -10,6 +10,7 @@ from core.system import System
 from screens.login import LoginScreen
 from screens.register import RegisterScreen
 from screens.home import HomeScreen
+from screens.settings import SettingsScreen
 from screens.profile import ProfileScreen
 from screens.find_bags import FindBagsScreen
 from screens.settings import SettingsScreen
@@ -23,6 +24,7 @@ class BagConnectApp(MDApp):
         super().__init__(**kwargs)
 
         self.tradutor = Tradutor()
+        self.theme_service = ThemeService()
 
         # Configurações atuais do usuário
         self.tema = "System"

@@ -1,20 +1,6 @@
 from kivy.app import App
 
 from kivymd.uix.screen import MDScreen
-from kivymd.uix.dialog import MDDialog
-from kivymd.uix.button import (
-    MDFlatButton,
-    MDRaisedButton,
-)
-from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.card import MDCard
-from kivymd.uix.list import (
-    OneLineAvatarIconListItem,
-    IconLeftWidget,
-    IconRightWidget,
-)
-
-from kivy.properties import StringProperty
 
 
 class SettingsScreen(MDScreen):
@@ -187,30 +173,12 @@ class SettingsScreen(MDScreen):
                     )
                 )
 
-            card.add_widget(item)
-            layout.add_widget(card)
 
-            self.cards_tema.append(
-                (card, item, opcao)
-            )
+    def on_pre_enter(self, *args):
 
-        self.dialog = MDDialog(
-            title="Tema",
-            type="custom",
-            content_cls=layout,
-            buttons=[
-                MDFlatButton(
-                    text="Cancelar",
-                    on_release=lambda x: self.dialog.dismiss(),
-                ),
-                MDRaisedButton(
-                    text="Salvar",
-                    on_release=self.salvar_tema,
-                ),
-            ],
-        )
+        app = App.get_running_app()
 
-        self.dialog.open()
+        self.modo_escuro = app.theme_cls.theme_style == "Dark"
 
 
     def selecionar_tema(self, tema):
@@ -225,15 +193,9 @@ class SettingsScreen(MDScreen):
                 else (1, 1, 1, 1)
             )
 
-            while len(item.children) > 1:
-                item.remove_widget(item.children[0])
+        App.get_running_app().alternar_tema(ativo)
 
-            if opcao == tema:
-                item.add_widget(
-                    IconRightWidget(
-                        icon="check"
-                    )
-                )
+        self.modo_escuro = ativo
 
 
     def salvar_tema(self, *args):
@@ -245,6 +207,6 @@ class SettingsScreen(MDScreen):
 
         self.dialog.dismiss()
 
+    def voltar_home(self):
 
-    def voltar(self):
         self.manager.current = "home"
