@@ -1,5 +1,3 @@
-from locale import getdefaultlocale
-
 from kivymd.app import MDApp
 from kivy.lang import Builder
 
@@ -13,7 +11,6 @@ from screens.home import HomeScreen
 from screens.settings import SettingsScreen
 from screens.profile import ProfileScreen
 from screens.find_bags import FindBagsScreen
-from screens.settings import SettingsScreen
 
 from widgets.drawer import Drawer
 
@@ -24,7 +21,6 @@ class BagConnectApp(MDApp):
         super().__init__(**kwargs)
 
         self.tradutor = Tradutor()
-        self.theme_service = ThemeService()
 
         # Configurações atuais do usuário
         self.tema = "System"
@@ -58,7 +54,7 @@ class BagConnectApp(MDApp):
 
         else:
             # Detecta automaticamente a linguagem do sistema
-            self.tradutor.idioma = System.obter_idioma()
+            self.tradutor.idioma = System.detectar_idioma()
 
         # Atualiza todas as telas já carregadas
         self.root.canvas.ask_update()

@@ -1,6 +1,19 @@
-from kivy.app import App
-
 from kivymd.uix.screen import MDScreen
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import (
+    MDFlatButton,
+    MDRaisedButton,
+)
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.card import MDCard
+from kivymd.uix.list import (
+    OneLineAvatarIconListItem,
+    IconLeftWidget,
+    IconRightWidget,
+)
+
+from kivy.app import App
+from kivy.properties import StringProperty
 
 
 class SettingsScreen(MDScreen):
@@ -17,10 +30,7 @@ class SettingsScreen(MDScreen):
     cards_tema = []
 
 
-    # =========================
     # IDIOMA
-    # =========================
-
     def abrir_menu_idioma(self):
         self.idioma_temp = self.idioma
         self.cards_idioma = []
@@ -32,7 +42,6 @@ class SettingsScreen(MDScreen):
         )
 
         for opcao in ["System", "English", "Português"]:
-
             card = MDCard(
                 orientation="vertical",
                 ripple_behavior=True,
@@ -96,7 +105,6 @@ class SettingsScreen(MDScreen):
         self.idioma_temp = idioma
 
         for card, item, opcao in self.cards_idioma:
-
             card.md_bg_color = (
                 (0.86, 0.92, 1, 1)
                 if opcao == idioma
@@ -123,12 +131,8 @@ class SettingsScreen(MDScreen):
         self.dialog.dismiss()
 
 
-    # =========================
     # TEMA
-    # =========================
-
     def abrir_menu_tema(self):
-
         self.tema_temp = self.tema
         self.cards_tema = []
 
@@ -139,7 +143,6 @@ class SettingsScreen(MDScreen):
         )
 
         for opcao in ["System", "Dark", "Light"]:
-
             card = MDCard(
                 orientation="vertical",
                 ripple_behavior=True,
@@ -173,33 +176,54 @@ class SettingsScreen(MDScreen):
                     )
                 )
 
+            card.add_widget(item)
+            layout.add_widget(card)
 
-    def on_pre_enter(self, *args):
+            self.cards_tema.append(
+                (card, item, opcao)
+            )
 
-        app = App.get_running_app()
+        self.dialog = MDDialog(
+            title="Tema",
+            type="custom",
+            content_cls=layout,
+            buttons=[
+                MDFlatButton(
+                    text="Cancelar",
+                    on_release=lambda x: self.dialog.dismiss(),
+                ),
+                MDRaisedButton(
+                    text="Salvar",
+                    on_release=self.salvar_tema,
+                ),
+            ],
+        )
 
-        self.modo_escuro = app.theme_cls.theme_style == "Dark"
+        self.dialog.open()
 
 
     def selecionar_tema(self, tema):
-
         self.tema_temp = tema
 
         for card, item, opcao in self.cards_tema:
-
             card.md_bg_color = (
                 (0.86, 0.92, 1, 1)
                 if opcao == tema
                 else (1, 1, 1, 1)
             )
 
-        App.get_running_app().alternar_tema(ativo)
+            while len(item.children) > 1:
+                item.remove_widget(item.children[0])
 
-        self.modo_escuro = ativo
+            if opcao == tema:
+                item.add_widget(
+                    IconRightWidget(
+                        icon="check"
+                    )
+                )
 
 
     def salvar_tema(self, *args):
-
         self.tema = self.tema_temp
 
         app = App.get_running_app()
@@ -207,6 +231,6 @@ class SettingsScreen(MDScreen):
 
         self.dialog.dismiss()
 
-    def voltar_home(self):
 
+    def voltar(self):
         self.manager.current = "home"
