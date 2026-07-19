@@ -1,3 +1,5 @@
+from kivy.app import App
+
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import (
@@ -29,7 +31,10 @@ class SettingsScreen(MDScreen):
     cards_tema = []
 
 
+    # =========================
     # IDIOMA
+    # =========================
+
     def abrir_menu_idioma(self):
         self.idioma_temp = self.idioma
         self.cards_idioma = []
@@ -41,6 +46,7 @@ class SettingsScreen(MDScreen):
         )
 
         for opcao in ["System", "English", "Português"]:
+
             card = MDCard(
                 orientation="vertical",
                 ripple_behavior=True,
@@ -99,10 +105,12 @@ class SettingsScreen(MDScreen):
 
         self.dialog.open()
 
+
     def selecionar_idioma(self, idioma):
         self.idioma_temp = idioma
 
         for card, item, opcao in self.cards_idioma:
+
             card.md_bg_color = (
                 (0.86, 0.92, 1, 1)
                 if opcao == idioma
@@ -119,13 +127,22 @@ class SettingsScreen(MDScreen):
                     )
                 )
 
+
     def salvar_idioma(self, *args):
         self.idioma = self.idioma_temp
+
+        app = App.get_running_app()
+        app.aplicar_idioma(self.idioma)
+
         self.dialog.dismiss()
 
 
+    # =========================
     # TEMA
+    # =========================
+
     def abrir_menu_tema(self):
+
         self.tema_temp = self.tema
         self.cards_tema = []
 
@@ -136,6 +153,7 @@ class SettingsScreen(MDScreen):
         )
 
         for opcao in ["System", "Dark", "Light"]:
+
             card = MDCard(
                 orientation="vertical",
                 ripple_behavior=True,
@@ -194,10 +212,13 @@ class SettingsScreen(MDScreen):
 
         self.dialog.open()
 
+
     def selecionar_tema(self, tema):
+
         self.tema_temp = tema
 
         for card, item, opcao in self.cards_tema:
+
             card.md_bg_color = (
                 (0.86, 0.92, 1, 1)
                 if opcao == tema
@@ -214,8 +235,14 @@ class SettingsScreen(MDScreen):
                     )
                 )
 
+
     def salvar_tema(self, *args):
+
         self.tema = self.tema_temp
+
+        app = App.get_running_app()
+        app.aplicar_tema(self.tema)
+
         self.dialog.dismiss()
 
 
