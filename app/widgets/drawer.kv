@@ -136,33 +136,13 @@
 
         text: "Configurações"
 
+        on_release:
+            app.root.get_screen("home").fechar_menu()
+            app.root.current = "settings"
+
         IconLeftWidget:
 
             icon: "cog"
-
-    MDBoxLayout:
-
-        size_hint_y: None
-        height: dp(48)
-
-        padding: [dp(72), 0, dp(16), 0]
-
-        MDLabel:
-
-            text: app.tr("tema_escuro", "Tema escuro")
-
-            valign: "center"
-
-        MDSwitch:
-
-            id: switch_tema_escuro
-
-            pos_hint: {"center_y": .5}
-
-            active: app.theme_cls.theme_style == "Dark"
-
-            on_active:
-                app.alternar_tema(self.active)
 
     OneLineIconListItem:
 

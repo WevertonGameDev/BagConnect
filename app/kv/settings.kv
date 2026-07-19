@@ -1,0 +1,105 @@
+#:kivy 2.0.0
+#:import dp kivy.metrics.dp
+
+<SettingsScreen>:
+
+    md_bg_color: app.theme_cls.bg_normal
+
+    MDBoxLayout:
+
+        orientation: "vertical"
+
+        MDTopAppBar:
+
+            title: app.tr("config_titulo", "Configurações")
+
+            elevation: 0
+
+            left_action_items: [["arrow-left", lambda x: root.voltar_home()]]
+
+            md_bg_color: app.theme_cls.bg_normal
+
+
+        ScrollView:
+
+            MDBoxLayout:
+
+                orientation: "vertical"
+
+                adaptive_height: True
+
+                padding: dp(25)
+
+                spacing: dp(20)
+
+
+                MDLabel:
+
+                    text: app.tr("config_titulo", "Configurações")
+
+                    font_style: "H5"
+
+                    bold: True
+
+                    adaptive_height: True
+
+
+                MDCard:
+
+                    orientation: "horizontal"
+
+                    padding: dp(18)
+
+                    spacing: dp(15)
+
+                    size_hint_y: None
+
+                    height: dp(80)
+
+                    radius: [16]
+
+                    elevation: 3
+
+
+                    MDIcon:
+
+                        icon: "weather-night" if root.modo_escuro else "white-balance-sunny"
+
+                        theme_text_color: "Primary"
+
+                        pos_hint: {"center_y": .5}
+
+
+                    MDBoxLayout:
+
+                        orientation: "vertical"
+
+
+                        MDLabel:
+
+                            text: app.tr("config_tema", "Tema")
+
+                            bold: True
+
+                            adaptive_height: True
+
+
+                        MDLabel:
+
+                            text: (app.tr("config_modo_escuro", "Modo Escuro") if root.modo_escuro else app.tr("config_modo_claro", "Modo Claro"))
+
+                            font_style: "Caption"
+
+                            theme_text_color: "Secondary"
+
+                            adaptive_height: True
+
+
+                    MDSwitch:
+
+                        active: root.modo_escuro
+
+                        pos_hint: {"center_y": .5}
+
+                        on_active:
+                            root.alternar_tema(self.active)

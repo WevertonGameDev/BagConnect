@@ -3,3 +3,4 @@ bagconnect.db
 *.pyc
 .venv/
 .env
+theme_store.json
