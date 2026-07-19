@@ -20,7 +20,6 @@ class System:
         try:
             # WINDOWS
             if sistema == "Windows":
-
                 import winreg
 
                 chave = winreg.OpenKey(
@@ -37,7 +36,6 @@ class System:
 
             # macOS
             elif sistema == "Darwin":
-
                 resultado = subprocess.check_output(
                     [
                         "defaults",
@@ -52,7 +50,6 @@ class System:
 
             # Linux
             elif sistema == "Linux":
-
                 try:
                     resultado = subprocess.check_output(
                         [
@@ -79,9 +76,7 @@ class System:
     @staticmethod
     def detectar_idioma():
         try:
-
-            codigo = locale.getdefaultlocale()[0] or ""
-
+            codigo = locale.getlocale()[0] or locale.getdefaultlocale()[0] or ""
             codigo = codigo.lower()
 
             if codigo.startswith("pt"):
