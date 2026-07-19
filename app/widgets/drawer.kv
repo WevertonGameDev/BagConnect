@@ -23,6 +23,7 @@
             icon: "close"
             theme_text_color: "Custom"
             text_color: 0.90, 0.30, 0.30, 1
+
             on_release:
                 app.root.get_screen("home").fechar_menu()
 
@@ -142,12 +143,12 @@
         on_release:
             app.root.get_screen("home").fechar_menu()
             app.root.current = "settings"
-
-        IconLeftWidget:
+            app.root.get_screen("home").fechar_menu()
 
         IconLeftWidget:
             icon: "cog"
 
+    # SAIR
     OneLineIconListItem:
 
         text: app.tr("menu_sair")
