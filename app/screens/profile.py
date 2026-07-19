@@ -1,3 +1,4 @@
+from kivy.app import App
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import (
@@ -73,17 +74,17 @@ class ProfileScreen(MDScreen):
     def editar_perfil(self):
 
         self.campo_usuario = MDTextField(
-            hint_text="Usuário",
+            hint_text=App.get_running_app().tr("campo_usuario"),
             text=self.usuario
         )
 
         self.campo_email = MDTextField(
-            hint_text="Email",
+            hint_text=App.get_running_app().tr("campo_email"),
             text=self.email
         )
 
         self.campo_cpf = MDTextField(
-            hint_text="CPF (Opcional)",
+            hint_text=App.get_running_app().tr("perfil_cpf_opcional"),
             text=self.cpf
         )
 
@@ -110,18 +111,18 @@ class ProfileScreen(MDScreen):
         conteudo.add_widget(self.campo_cpf)
 
         self.botao_salvar = MDRaisedButton(
-            text="Salvar",
+            text=App.get_running_app().tr("perfil_salvar"),
             disabled=True,
             on_release=self.salvar_edicao
         )
 
         self.dialog = MDDialog(
-            title="Editar Perfil",
+            title=App.get_running_app().tr("perfil_editar_titulo"),
             type="custom",
             content_cls=conteudo,
             buttons=[
                 MDFlatButton(
-                    text="Cancelar",
+                    text=App.get_running_app().tr("perfil_cancelar"),
                     on_release=lambda x: self.dialog.dismiss()
                 ),
                 self.botao_salvar
@@ -198,15 +199,15 @@ class ProfileScreen(MDScreen):
         cpf = self.campo_cpf.text.strip()
 
         if usuario == "":
-            toast("Informe um usuário.")
+            toast(App.get_running_app().tr("perfil_informe_usuario"))
             return
 
         if not self.validar_email(email):
-            toast("Email inválido.")
+            toast(App.get_running_app().tr("perfil_email_invalido"))
             return
 
         if not self.validar_cpf(cpf):
-            toast("CPF inválido.")
+            toast(App.get_running_app().tr("perfil_cpf_invalido"))
             return
 
         service = UserService()
@@ -226,23 +227,23 @@ class ProfileScreen(MDScreen):
             self.email = retorno.email
             self.cpf = retorno.cpf if retorno.cpf else ""
 
-            toast("Perfil atualizado.")
+            toast(App.get_running_app().tr("perfil_atualizado"))
 
             self.dialog.dismiss()
 
         else:
 
             if retorno == "usuario":
-                toast("Este usuário já existe.")
+                toast(App.get_running_app().tr("perfil_usuario_ja_existe"))
 
             elif retorno == "email":
-                toast("Este email já está em uso.")
+                toast(App.get_running_app().tr("perfil_email_ja_uso"))
 
             elif retorno == "cpf":
-                toast("Este CPF já está cadastrado.")
+                toast(App.get_running_app().tr("perfil_cpf_ja_cadastrado"))
 
             else:
-                toast("Erro ao atualizar perfil.")
+                toast(App.get_running_app().tr("perfil_erro_atualizar"))
 
 
     def voltar(self):

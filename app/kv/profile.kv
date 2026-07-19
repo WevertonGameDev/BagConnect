@@ -11,7 +11,7 @@
 
         MDTopAppBar:
 
-            title: "Perfil"
+            title: app.tr("perfil_titulo")
 
             elevation: 0
 
@@ -74,12 +74,12 @@
                     bold: True
 
                     text:
-                        "Conectado como Passageiro" if root.conectado else "Não conectado"
+                        app.tr("perfil_conectado") if root.conectado else app.tr("perfil_nao_conectado")
 
                 MDRaisedButton:
 
                     text:
-                        "Desconectar" if root.conectado else "Conectar"
+                        app.tr("perfil_desconectar") if root.conectado else app.tr("perfil_conectar")
 
                     pos_hint:
                         {"center_x": .5}

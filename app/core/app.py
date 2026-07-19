@@ -12,6 +12,7 @@ from screens.home import HomeScreen
 from screens.settings import SettingsScreen
 from screens.profile import ProfileScreen
 from screens.find_bags import FindBagsScreen
+from screens.settings import SettingsScreen
 
 from widgets.drawer import Drawer
 
