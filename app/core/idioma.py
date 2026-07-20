@@ -95,7 +95,10 @@ class Tradutor:
                 "config_ingles": "English",
                 "config_portugues": "Português",
                 "config_claro": "Claro",
-                "config_escuro": "Escuro"
+                "config_escuro": "Escuro",
+                "suporte_titulo": "Suporte Online",
+                "suporte_sem_tickets": "Você ainda não possui tickets.",
+                "suporte_novo_ticket": "Novo Ticket",
             },
             "en": {
                 "app_nome": "BagConnect",
@@ -185,7 +188,10 @@ class Tradutor:
                 "config_ingles": "English",
                 "config_portugues": "Portuguese",
                 "config_claro": "Light",
-                "config_escuro": "Dark"
+                "config_escuro": "Dark",
+                "suporte_titulo": "Online Support",
+                "suporte_sem_tickets": "You don't have any tickets yet.",
+                "suporte_novo_ticket": "New Ticket",
             },
         }
 

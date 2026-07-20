@@ -96,7 +96,7 @@ class HomeScreen(MDScreen):
 
     # BOTÕES
     def abrir_chat(self):
-        print("Abrir Chat")
+        self.manager.current = "support"
 
 
     def abrir_bags(self):

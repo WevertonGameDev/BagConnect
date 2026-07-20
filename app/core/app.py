@@ -11,6 +11,7 @@ from screens.home import HomeScreen
 from screens.settings import SettingsScreen
 from screens.profile import ProfileScreen
 from screens.find_bags import FindBagsScreen
+from screens.support import SupportScreen
 
 from widgets.drawer import Drawer
 
@@ -67,6 +68,7 @@ class BagConnectApp(MDApp):
         Builder.load_file("kv/profile.kv")
         Builder.load_file("kv/find_bags.kv")
         Builder.load_file("kv/settings.kv")
+        Builder.load_file("kv/support.kv")
 
         self.theme_cls.primary_palette = "Blue"
 
@@ -108,6 +110,12 @@ class BagConnectApp(MDApp):
         manager.add_widget(
             SettingsScreen(
                 name="settings"
+            )
+        )
+
+        manager.add_widget(
+            SupportScreen(
+                name="support"
             )
         )
 
