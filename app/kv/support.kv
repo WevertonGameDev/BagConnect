@@ -1,0 +1,51 @@
+#:kivy 2.0.0
+#:import dp kivy.metrics.dp
+
+<SupportScreen>
+
+    MDBoxLayout:
+
+        orientation: "vertical"
+
+        MDTopAppBar:
+
+            title: app.tr("menu_suporte", "Suporte")
+
+            elevation: 0
+
+            left_action_items:
+                [["arrow-left", lambda x: setattr(app.root, "current", "home")]]
+
+        MDBoxLayout:
+
+            orientation: "vertical"
+
+            padding: dp(20)
+
+            spacing: dp(20)
+
+            MDRaisedButton:
+
+                text: app.tr("suporte_novo_ticket", "Novo Ticket")
+
+                icon: "plus"
+
+                pos_hint: {"center_x": .5}
+
+                on_release:
+                    root.abrir_novo_ticket()
+
+            RecycleView:
+
+                id: rv
+
+                viewclass: "TicketCard"
+
+                data:
+                    [
+                    {
+                    "ticket": ticket,
+                    "screen": root
+                    }
+                    for ticket in root.tickets
+                    ]

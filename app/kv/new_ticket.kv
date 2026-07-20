@@ -1,0 +1,89 @@
+#:import dp kivy.metrics.dp
+
+<NewTicketScreen>
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: app.tr("novo_ticket", "Novo Ticket")
+            elevation: 0
+            left_action_items: [["arrow-left", lambda x: root.voltar()]]
+
+        ScrollView:
+
+            MDBoxLayout:
+                orientation: "vertical"
+                adaptive_height: True
+
+                padding: dp(20)
+                spacing: dp(18)
+
+                MDLabel:
+                    text: app.tr("ticket_descricao", "Para melhor atendê-lo, precisamos de algumas informações.")
+                    adaptive_height: True
+                    theme_text_color: "Secondary"
+
+                MDTextField:
+                    id: assunto
+
+                    hint_text: app.tr("ticket_assunto", "Assunto")
+
+                    helper_text:
+                        app.tr("campo_obrigatorio", "Campo obrigatório")
+
+                    helper_text_mode: "on_error"
+
+                    mode: "rectangle"
+
+                MDTextField:
+                    id: descricao
+
+                    hint_text:
+                        app.tr("ticket_descricao_label", "Descrição")
+
+                    helper_text:
+                        app.tr("campo_obrigatorio", "Campo obrigatório")
+
+                    helper_text_mode: "on_error"
+
+                    multiline: True
+
+                    mode: "rectangle"
+
+                    height: dp(120)
+
+                MDTextField:
+                    id: cpf
+
+                    hint_text: app.tr("ticket_cpf", "CPF")
+
+                    helper_text:
+                        app.tr("campo_obrigatorio", "Campo obrigatório")
+
+                    helper_text_mode: "on_error"
+
+                    mode: "rectangle"
+
+                MDTextField:
+                    id: codigo
+
+                    hint_text:
+                        app.tr("ticket_codigo", "Código da Bagagem")
+
+                    helper_text:
+                        app.tr("campo_obrigatorio", "Campo obrigatório")
+
+                    helper_text_mode: "on_error"
+
+                    mode: "rectangle"
+
+                MDRaisedButton:
+                    text: app.tr("ticket_criar", "Criar Ticket")
+                    pos_hint: {"center_x": .5}
+                    on_release:
+                        root.criar_ticket()
+
+                Widget:
+                    size_hint_y: None
+                    height: dp(20)
