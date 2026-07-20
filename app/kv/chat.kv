@@ -1,0 +1,52 @@
+#:import dp kivy.metrics.dp
+
+<ChatScreen>
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: app.tr("ticket_chat", "Ticket #001")
+            elevation: 0
+            left_action_items: [["arrow-left", lambda x: root.voltar()]]
+
+        ScrollView:
+
+            MDBoxLayout:
+                id: mensagens
+
+                orientation: "vertical"
+                adaptive_height: True
+
+                padding: dp(16)
+                spacing: dp(12)
+
+                MDCard:
+                    orientation: "vertical"
+                    adaptive_height: True
+                    padding: dp(12)
+                    radius: [16]
+
+                    MDLabel:
+                        text: app.tr("ticket_msg_auto", "Olá!\nRecebemos sua solicitação.\nAguarde um de nossos funcionários.")
+                        adaptive_height: True
+
+        MDSeparator:
+
+        MDBoxLayout:
+            adaptive_height: True
+            padding: dp(10)
+            spacing: dp(10)
+
+            MDTextField:
+                id: mensagem
+
+                hint_text: app.tr("ticket_digite", "Digite uma mensagem...")
+
+                mode: "rectangle"
+
+            MDRaisedButton:
+                text: app.tr("enviar", "Enviar")
+
+                on_release:
+                    root.enviar_mensagem()

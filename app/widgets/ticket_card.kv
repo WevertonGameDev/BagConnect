@@ -1,0 +1,40 @@
+#:import dp kivy.metrics.dp
+
+<TicketCard>
+    size_hint_y: None
+
+    height: dp(90)
+
+    radius: [18]
+
+    elevation: 2
+
+    ripple_behavior: True
+
+    on_release:
+        root.abrir()
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        padding: dp(15)
+
+        spacing: dp(6)
+
+        MDLabel:
+            text:
+                "Ticket #" + str(root.ticket.id)
+
+            bold: True
+
+        MDLabel:
+            text:
+                root.ticket.assunto
+
+            theme_text_color: "Secondary"
+
+        MDLabel:
+            text:
+                root.ticket.status
+
+            theme_text_color: "Primary"
