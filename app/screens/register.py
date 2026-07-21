@@ -170,5 +170,5 @@ class RegisterScreen(MDScreen):
         )
 
 
-        def voltar_login(self):
-            self.manager.current = "login"
+    def voltar_login(self):
+        self.manager.current = "login"
