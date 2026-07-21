@@ -11,21 +11,46 @@ class HomeScreen(MDScreen):
     nome_usuario = StringProperty("")
     email_usuario = StringProperty("")
 
+    ola = StringProperty("")
+    home_bagagens_titulo = StringProperty("")
+    home_bagagens_texto = StringProperty("")
+    home_botao_bagagem = StringProperty("")
+    home_suporte_titulo = StringProperty("")
+    home_suporte_texto = StringProperty("")
+    home_botao_suporte = StringProperty("")
+
     menu_aberto = False
 
     # CARREGAR USUÁRIO LOGADO
     def on_enter(self):
+        self.atualizar_textos()
+
         usuario = Session.obter_usuario()
 
         if usuario:
             self.nome_usuario = usuario.usuario
             self.email_usuario = usuario.email
-            
+
         else:
-            self.nome_usuario = App.get_running_app().tr("home_usuario_padrao")
-            self.email_usuario = App.get_running_app().tr("home_email_padrao")
-        
+            app = App.get_running_app()
+
+            self.nome_usuario = app.tr("home_usuario_padrao")
+            self.email_usuario = app.tr("home_email_padrao")
+
         self.ids.drawer.carregar_usuario()
+
+    def atualizar_textos(self):
+        app = App.get_running_app()
+
+        self.ola = app.tr("home_ola")
+
+        self.home_bagagens_titulo = app.tr("home_bagagens_titulo")
+        self.home_bagagens_texto = app.tr("home_bagagens_texto")
+        self.home_botao_bagagem = app.tr("home_botao_bagagem")
+
+        self.home_suporte_titulo = app.tr("home_suporte_titulo")
+        self.home_suporte_texto = app.tr("home_suporte_texto")
+        self.home_botao_suporte = app.tr("home_botao_suporte")
 
     # MENU
     def abrir_menu(self):
@@ -56,7 +81,6 @@ class HomeScreen(MDScreen):
 
         self.menu_aberto = True
 
-
     def fechar_menu(self):
 
         if not self.menu_aberto:
@@ -79,7 +103,6 @@ class HomeScreen(MDScreen):
         anim_drawer.start(drawer)
         anim_overlay.start(overlay)
 
-
         def finalizar(*args):
             overlay.disabled = True
             overlay.size_hint = (None, None)
@@ -93,16 +116,13 @@ class HomeScreen(MDScreen):
         )
         self.menu_aberto = False
 
-
     # BOTÕES
     def abrir_chat(self):
         self.manager.current = "support"
 
-
     def abrir_bags(self):
         self.manager.current = "find_bags"
 
-    
     def abrir_perfil(self):
         self.fechar_menu()
         self.manager.current = "profile"

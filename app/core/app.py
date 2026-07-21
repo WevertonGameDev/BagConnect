@@ -1,5 +1,6 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
+from kivy.properties import NumericProperty
 
 from core.manager import ScreenManager
 from core.idioma import Tradutor
@@ -21,6 +22,9 @@ from widgets.ticket_card import TicketCard
 
 class BagConnectApp(MDApp):
 
+    # Sempre que esse número mudar, todas as telas poderão atualizar seus textos.
+    idioma_evento = NumericProperty(0)
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -30,6 +34,7 @@ class BagConnectApp(MDApp):
         self.idioma = "System"
 
 
+    # Tradução
     def tr(self, chave, valor_padrao=None):
         return self.tradutor.traduzir(chave, valor_padrao)
 
@@ -48,7 +53,6 @@ class BagConnectApp(MDApp):
         else:
             self.theme_cls.theme_style = System.detectar_tema()
 
-
     # Idioma
     def aplicar_idioma(self, idioma):
 
@@ -63,7 +67,8 @@ class BagConnectApp(MDApp):
         else:
             self.tradutor.idioma = System.detectar_idioma()
 
-        self.root.canvas.ask_update()
+        # Dispara um evento para todas as telas
+        self.idioma_evento += 1
 
 
     # Build
@@ -78,7 +83,6 @@ class BagConnectApp(MDApp):
         Builder.load_file("kv/profile.kv")
         Builder.load_file("kv/find_bags.kv")
         Builder.load_file("kv/settings.kv")
-
         Builder.load_file("kv/support.kv")
         Builder.load_file("kv/new_ticket.kv")
         Builder.load_file("kv/chat.kv")
@@ -95,7 +99,6 @@ class BagConnectApp(MDApp):
         manager.add_widget(ProfileScreen(name="profile"))
         manager.add_widget(FindBagsScreen(name="find_bags"))
         manager.add_widget(SettingsScreen(name="settings"))
-
         manager.add_widget(SupportScreen(name="support"))
         manager.add_widget(NewTicketScreen(name="new_ticket"))
         manager.add_widget(ChatScreen(name="chat"))

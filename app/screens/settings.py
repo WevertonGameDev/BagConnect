@@ -18,6 +18,12 @@ from kivy.properties import StringProperty
 
 class SettingsScreen(MDScreen):
 
+    texto_idioma = StringProperty("")
+    texto_tema = StringProperty("")
+    config_titulo = StringProperty("")
+    config_linguagem = StringProperty("")
+    config_tema = StringProperty("")
+
     idioma = StringProperty("System")
     tema = StringProperty("System")
 
@@ -30,8 +36,24 @@ class SettingsScreen(MDScreen):
     cards_tema = []
 
 
+    def on_pre_enter(self):
+        app = App.get_running_app()
+
+        self.idioma = app.idioma
+        self.tema = app.tema
+
+        self.atualizar_textos()
+
+
     # IDIOMA
     def abrir_menu_idioma(self):
+
+        if self.dialog:
+            self.dialog.dismiss()
+            self.dialog = None
+
+        app = App.get_running_app()
+
         self.idioma_temp = self.idioma
         self.cards_idioma = []
 
@@ -41,7 +63,14 @@ class SettingsScreen(MDScreen):
             spacing="5dp",
         )
 
-        for opcao in ["System", "English", "Português"]:
+        opcoes = [
+            ("System", app.tr("config_sistema", "Sistema")),
+            ("English", "English"),
+            ("Português", "Português"),
+        ]
+
+        for valor, texto in opcoes:
+
             card = MDCard(
                 orientation="vertical",
                 ripple_behavior=True,
@@ -51,48 +80,44 @@ class SettingsScreen(MDScreen):
                 height="50dp",
                 md_bg_color=(
                     (0.86, 0.92, 1, 1)
-                    if opcao == self.idioma_temp
-                    else (1, 1, 1, 1)
+                    if valor == self.idioma_temp
+                    else app.theme_cls.bg_normal
                 ),
             )
 
             item = OneLineAvatarIconListItem(
-                text=opcao,
+                text=texto,
                 divider=None,
-                on_release=lambda x, o=opcao: self.selecionar_idioma(o),
+                on_release=lambda x, o=valor: self.selecionar_idioma(o),
             )
 
             item.add_widget(
-                IconLeftWidget(
-                    icon="translate"
-                )
+                IconLeftWidget(icon="translate")
             )
 
-            if opcao == self.idioma_temp:
+            if valor == self.idioma_temp:
                 item.add_widget(
-                    IconRightWidget(
-                        icon="check"
-                    )
+                    IconRightWidget(icon="check")
                 )
 
             card.add_widget(item)
             layout.add_widget(card)
 
             self.cards_idioma.append(
-                (card, item, opcao)
+                (card, item, valor)
             )
 
         self.dialog = MDDialog(
-            title="Idioma",
+            title=self.config_linguagem,
             type="custom",
             content_cls=layout,
             buttons=[
                 MDFlatButton(
-                    text="Cancelar",
+                    text=app.tr("cancelar"),
                     on_release=lambda x: self.dialog.dismiss(),
                 ),
                 MDRaisedButton(
-                    text="Salvar",
+                    text=app.tr("salvar"),
                     on_release=self.salvar_idioma,
                 ),
             ],
@@ -102,13 +127,17 @@ class SettingsScreen(MDScreen):
 
 
     def selecionar_idioma(self, idioma):
+
+        app = App.get_running_app()
+
         self.idioma_temp = idioma
 
         for card, item, opcao in self.cards_idioma:
+
             card.md_bg_color = (
                 (0.86, 0.92, 1, 1)
                 if opcao == idioma
-                else (1, 1, 1, 1)
+                else app.theme_cls.bg_normal
             )
 
             while len(item.children) > 1:
@@ -129,6 +158,7 @@ class SettingsScreen(MDScreen):
         app.aplicar_idioma(self.idioma)
 
         self.dialog.dismiss()
+        self.atualizar_textos()
 
 
     # TEMA
@@ -184,7 +214,7 @@ class SettingsScreen(MDScreen):
             )
 
         self.dialog = MDDialog(
-            title="Tema",
+            title=self.config_tema,
             type="custom",
             content_cls=layout,
             buttons=[
@@ -230,7 +260,32 @@ class SettingsScreen(MDScreen):
         app.aplicar_tema(self.tema)
 
         self.dialog.dismiss()
+        self.atualizar_textos()
 
 
     def voltar(self):
         self.manager.current = "home"
+    
+
+    def atualizar_textos(self):
+        app = App.get_running_app()
+
+        self.config_titulo = app.tr("config_titulo")
+        self.config_linguagem = app.tr("config_linguagem")
+        self.config_tema = app.tr("config_tema")
+
+        # Idioma
+        if self.idioma == "System":
+            self.texto_idioma = app.tr("config_sistema")
+        elif self.idioma == "English":
+            self.texto_idioma = app.tr("config_ingles")
+        else:
+            self.texto_idioma = app.tr("config_portugues")
+
+        # Tema
+        if self.tema == "System":
+            self.texto_tema = app.tr("config_sistema")
+        elif self.tema == "Dark":
+            self.texto_tema = app.tr("config_escuro")
+        else:
+            self.texto_tema = app.tr("config_claro")

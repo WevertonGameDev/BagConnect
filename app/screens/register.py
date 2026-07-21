@@ -1,6 +1,8 @@
 import re
 
 from kivy.app import App
+from kivy.properties import StringProperty
+
 from kivymd.uix.screen import MDScreen
 from kivymd.toast import toast
 
@@ -10,6 +12,33 @@ from services.auth_service import AuthService
 class RegisterScreen(MDScreen):
 
     auth = AuthService()
+
+    titulo = StringProperty("")
+    subtitulo = StringProperty("")
+    campo_usuario = StringProperty("")
+    campo_email = StringProperty("")
+    campo_senha = StringProperty("")
+    campo_confirmar_senha = StringProperty("")
+    botao_cadastrar = StringProperty("")
+    ja_tenho_conta = StringProperty("")
+
+
+    def on_pre_enter(self):
+        self.atualizar_textos()
+
+
+    def atualizar_textos(self):
+        app = App.get_running_app()
+
+        self.titulo = app.tr("cadastro_titulo")
+        self.subtitulo = app.tr("cadastro_subtitulo")
+        self.campo_usuario = app.tr("campo_usuario")
+        self.campo_email = app.tr("campo_email")
+        self.campo_senha = app.tr("campo_senha")
+        self.campo_confirmar_senha = app.tr("campo_confirmar_senha")
+        self.botao_cadastrar = app.tr("cadastro_botao")
+        self.ja_tenho_conta = app.tr("ja_tenho_conta")
+
 
     def validar_email(self, email):
         padrao = r'^[\w\.-]+@[\w\.-]+\.\w+$'
