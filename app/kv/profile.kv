@@ -11,7 +11,7 @@
 
         MDTopAppBar:
 
-            title: app.tr("perfil_titulo")
+            title: root.titulo
 
             elevation: 0
 
@@ -68,18 +68,15 @@
                 MDSeparator:
 
                 MDLabel:
+                    text: root.status_conexao
 
                     halign: "center"
 
                     bold: True
 
-                    text:
-                        app.tr("perfil_conectado") if root.conectado else app.tr("perfil_nao_conectado")
-
                 MDRaisedButton:
 
-                    text:
-                        app.tr("perfil_desconectar") if root.conectado else app.tr("perfil_conectar")
+                    text: root.botao_conexao
 
                     pos_hint:
                         {"center_x": .5}
@@ -92,15 +89,14 @@
 
                 Widget:
 
-        MDFloatingActionButton:
+    MDFloatingActionButton:
+        icon: "pencil"
 
-            icon: "pencil"
+        pos_hint:
+            {"right": .96, "y": .03}
 
-            pos_hint:
-                {"right": .96, "y": .03}
+        md_bg_color:
+            app.theme_cls.primary_color
 
-            md_bg_color:
-                app.theme_cls.primary_color
-
-            on_release:
-                root.editar_perfil()
+        on_release:
+            root.editar_perfil()

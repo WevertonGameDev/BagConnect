@@ -6,9 +6,12 @@
         orientation: "vertical"
 
         MDTopAppBar:
-            title: app.tr("ticket_chat", "Ticket #001")
+            title: root.titulo
+
             elevation: 0
-            left_action_items: [["arrow-left", lambda x: root.voltar()]]
+
+            left_action_items:
+                [["arrow-left", lambda x: root.voltar()]]
 
         ScrollView:
 
@@ -28,7 +31,8 @@
                     radius: [16]
 
                     MDLabel:
-                        text: app.tr("ticket_msg_auto", "Olá!\nRecebemos sua solicitação.\nAguarde um de nossos funcionários.")
+                        text: root.mensagem_auto
+
                         adaptive_height: True
 
         MDSeparator:
@@ -41,12 +45,12 @@
             MDTextField:
                 id: mensagem
 
-                hint_text: app.tr("ticket_digite", "Digite uma mensagem...")
+                hint_text: root.digite
 
                 mode: "rectangle"
 
             MDRaisedButton:
-                text: app.tr("enviar", "Enviar")
+                text: root.enviar
 
                 on_release:
                     root.enviar_mensagem()
