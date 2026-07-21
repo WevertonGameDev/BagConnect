@@ -6,9 +6,13 @@
         orientation: "vertical"
 
         MDTopAppBar:
-            title: app.tr("novo_ticket", "Novo Ticket")
+
+            title: root.titulo
+
             elevation: 0
-            left_action_items: [["arrow-left", lambda x: root.voltar()]]
+
+            left_action_items:
+                [["arrow-left", lambda x: root.voltar()]]
 
         ScrollView:
 
@@ -20,17 +24,17 @@
                 spacing: dp(18)
 
                 MDLabel:
-                    text: app.tr("ticket_descricao", "Para melhor atendê-lo, precisamos de algumas informações.")
+                    text: root.descricao_ticket
+
                     adaptive_height: True
                     theme_text_color: "Secondary"
 
                 MDTextField:
                     id: assunto
 
-                    hint_text: app.tr("ticket_assunto", "Assunto")
+                    hint_text: root.assunto
 
-                    helper_text:
-                        app.tr("campo_obrigatorio", "Campo obrigatório")
+                    helper_text: root.campo_obrigatorio
 
                     helper_text_mode: "on_error"
 
@@ -39,11 +43,9 @@
                 MDTextField:
                     id: descricao
 
-                    hint_text:
-                        app.tr("ticket_descricao_label", "Descrição")
+                    hint_text: root.descricao_label
 
-                    helper_text:
-                        app.tr("campo_obrigatorio", "Campo obrigatório")
+                    helper_text: root.campo_obrigatorio
 
                     helper_text_mode: "on_error"
 
@@ -56,10 +58,9 @@
                 MDTextField:
                     id: cpf
 
-                    hint_text: app.tr("ticket_cpf", "CPF")
+                    hint_text: root.cpf
 
-                    helper_text:
-                        app.tr("campo_obrigatorio", "Campo obrigatório")
+                    helper_text: root.campo_obrigatorio
 
                     helper_text_mode: "on_error"
 
@@ -68,19 +69,20 @@
                 MDTextField:
                     id: codigo
 
-                    hint_text:
-                        app.tr("ticket_codigo", "Código da Bagagem")
+                    hint_text: root.codigo_bagagem
 
-                    helper_text:
-                        app.tr("campo_obrigatorio", "Campo obrigatório")
+                    helper_text: root.campo_obrigatorio
 
                     helper_text_mode: "on_error"
 
                     mode: "rectangle"
 
                 MDRaisedButton:
-                    text: app.tr("ticket_criar", "Criar Ticket")
-                    pos_hint: {"center_x": .5}
+                    text: root.criar
+
+                    pos_hint:
+                        {"center_x": .5}
+
                     on_release:
                         root.criar_ticket()
 
