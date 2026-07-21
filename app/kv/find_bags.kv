@@ -8,7 +8,7 @@
         orientation: "vertical"
 
         MDTopAppBar:
-            title: app.tr("find_bags_titulo")
+            title: root.titulo
 
             elevation: 0
 
@@ -46,36 +46,38 @@
                     MDSeparator:
 
                     MDLabel:
-                        text: app.tr("find_bags_cpf")
+                        text: root.cpf_titulo
+
                         bold: True
                         adaptive_height: True
 
                     MDTextField:
                         id: cpf
 
-                        hint_text: app.tr("find_bags_cpf_hint")
+                        hint_text: root.cpf_hint
 
-                        helper_text: app.tr("find_bags_cpf_helper")
+                        helper_text: root.cpf_helper
 
                         helper_text_mode: "on_focus"
 
                     MDLabel:
-                        text: app.tr("find_bags_codigo")
+
+                        text: root.codigo_titulo
+
                         bold: True
                         adaptive_height: True
 
                     MDTextField:
                         id: codigo
 
-                        hint_text: app.tr("find_bags_codigo_hint")
+                        hint_text: root.codigo_hint
 
-                        helper_text: app.tr("find_bags_codigo_helper")
+                        helper_text: root.codigo_helper
 
                         helper_text_mode: "on_focus"
 
                     MDRaisedButton:
-
-                        text: app.tr("find_bags_botao_consultar")
+                        text: root.botao_consultar
 
                         size_hint_x: 1
 
@@ -85,7 +87,7 @@
                     MDSeparator:
 
                     MDLabel:
-                        text: app.tr("find_bags_encontrada")
+                        text: root.resultado_titulo
 
                         font_style: "H6"
 
@@ -124,7 +126,7 @@
                         MDSeparator:
 
                         MDLabel:
-                            text: app.tr("find_bags_status")
+                            text: root.status_label
 
                             bold: True
 

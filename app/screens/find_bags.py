@@ -1,3 +1,6 @@
+from kivy.app import App
+from kivy.properties import StringProperty
+
 from kivymd.uix.screen import MDScreen
 from kivy.animation import Animation
 
@@ -6,17 +9,68 @@ from kivymd.uix.button import MDFlatButton
 
 from services.bag_service import BagService
 
-from kivy.app import App
-
 
 class FindBagsScreen(MDScreen):
-
     dialog = None
+
+    titulo = StringProperty("")
+
+    cpf_titulo = StringProperty("")
+    cpf_hint = StringProperty("")
+    cpf_helper = StringProperty("")
+
+    codigo_titulo = StringProperty("")
+    codigo_hint = StringProperty("")
+    codigo_helper = StringProperty("")
+
+    botao_consultar = StringProperty("")
+
+    resultado_titulo = StringProperty("")
+    status_label = StringProperty("")
+
+
+    def __init__(self, **kwargs):
+
+        super().__init__(**kwargs)
+
+        app = App.get_running_app()
+
+        if app:
+
+            app.bind(
+                idioma_evento=self._idioma_alterado
+            )
+
+
+    def on_pre_enter(self):
+
+        self.atualizar_textos()
+
+
+    def _idioma_alterado(self, *args):
+
+        self.atualizar_textos()
+
+
+    def atualizar_textos(self):
+        app = App.get_running_app()
+
+        self.titulo = app.tr("find_bags_titulo")
+        self.cpf_titulo = app.tr("find_bags_cpf")
+        self.cpf_hint = app.tr("find_bags_cpf_hint")
+        self.cpf_helper = app.tr("find_bags_cpf_helper")
+        self.codigo_titulo = app.tr("find_bags_codigo")
+        self.codigo_hint = app.tr("find_bags_codigo_hint")
+        self.codigo_helper = app.tr("find_bags_codigo_helper")
+        self.botao_consultar = app.tr("find_bags_botao_consultar")
+        self.resultado_titulo = app.tr("find_bags_encontrada")
+        self.status_label = app.tr("find_bags_status")
 
 
     # BOTÕES
     def voltar(self):
         self.manager.current = "home"
+
 
     def abrir_historico(self):
         print("Abrir histórico")
@@ -30,8 +84,14 @@ class FindBagsScreen(MDScreen):
 
         if not cpf or not codigo:
             self.mostrar_dialogo(
-                App.get_running_app().tr("find_bags_atencao"),
-                App.get_running_app().tr("find_bags_preencha_campos")
+
+                App.get_running_app().tr(
+                    "find_bags_atencao"
+                ),
+
+                App.get_running_app().tr(
+                    "find_bags_preencha_campos"
+                )
             )
             return
 
@@ -45,8 +105,14 @@ class FindBagsScreen(MDScreen):
             self.ocultar_resultado()
 
             self.mostrar_dialogo(
-                App.get_running_app().tr("find_bags_nao_encontrada"),
-                App.get_running_app().tr("find_bags_nao_encontrada_texto")
+
+                App.get_running_app().tr(
+                    "find_bags_nao_encontrada"
+                ),
+
+                App.get_running_app().tr(
+                    "find_bags_nao_encontrada_texto"
+                )
             )
 
             return
@@ -62,11 +128,18 @@ class FindBagsScreen(MDScreen):
         )
 
         self.ids.bag_status.text = (
-            f"{App.get_running_app().tr('find_bags_status_prefix')} {bagagem['status']}"
+
+            f"{App.get_running_app().tr('find_bags_status_prefix')} "
+            f"{bagagem['status']}"
+
         )
 
         self.ids.bag_descricao.text = (
-            App.get_running_app().tr("find_bags_resultado_sucesso")
+
+            App.get_running_app().tr(
+                "find_bags_resultado_sucesso"
+            )
+
         )
 
         card = self.ids.resultado_card
@@ -77,6 +150,7 @@ class FindBagsScreen(MDScreen):
             opacity=1,
             d=.25
         ).start(card)
+
 
     def ocultar_resultado(self):
 
