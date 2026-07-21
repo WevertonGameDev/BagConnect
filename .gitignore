@@ -3,4 +3,5 @@ bagconnect.db
 *.pyc
 .venv/
 .env
+.vscode
 theme_store.json

@@ -6,7 +6,6 @@
 
 
     MDBoxLayout:
-
         orientation: "vertical"
 
         padding: dp(35)
@@ -20,8 +19,7 @@
 
 
         MDLabel:
-
-            text: app.tr("app_nome")
+            text: root.titulo_app
 
             halign: "center"
 
@@ -34,8 +32,7 @@
 
 
         MDLabel:
-
-            text: app.tr("login_subtitulo")
+            text: root.subtitulo
 
             halign: "center"
 
@@ -46,13 +43,11 @@
 
 
         Widget:
-
             size_hint_y: .2
 
 
 
         MDCard:
-
             orientation: "vertical"
 
             padding: dp(30)
@@ -78,8 +73,7 @@
 
 
             MDLabel:
-
-                text: app.tr("login_titulo")
+                text: root.titulo_login
 
                 font_style: "H5"
 
@@ -92,10 +86,9 @@
 
 
             MDTextField:
-
                 id: email
 
-                hint_text: app.tr("campo_email")
+                hint_text: root.email
 
                 icon_left: "email-outline"
 
@@ -104,10 +97,9 @@
 
 
             MDTextField:
-
                 id: password
 
-                hint_text: app.tr("campo_senha")
+                hint_text: root.senha
 
                 password: True
 
@@ -118,9 +110,7 @@
 
 
             MDRaisedButton:
-
-
-                text: app.tr("login_botao")
+                text: root.botao_login
 
                 size_hint_x: 1
 
@@ -128,15 +118,12 @@
 
 
                 on_release:
-
                     root.login()
 
 
 
             MDTextButton:
-
-
-                text: app.tr("criar_conta")
+                text: root.criar_conta
 
                 pos_hint:
 
@@ -156,8 +143,7 @@
 
 
         MDLabel:
-
-            text: app.tr("rodape_app")
+            text: root.rodape
 
             halign: "center"
 

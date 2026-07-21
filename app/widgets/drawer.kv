@@ -69,7 +69,6 @@
 
     # HOME
     MDCard:
-
         elevation: 0
 
         radius: [10]
@@ -81,8 +80,7 @@
         height: dp(48)
 
         OneLineIconListItem:
-
-            text: app.tr("menu_home")
+            text: root.menu_home
 
             divider: None
 
@@ -104,7 +102,7 @@
     # BAGAGENS
     OneLineIconListItem:
 
-        text: app.tr("menu_bagagens")
+        text: root.menu_bagagens
 
         IconLeftWidget:
 
@@ -112,8 +110,7 @@
 
     # SUPORTE
     OneLineIconListItem:
-
-        text: app.tr("menu_suporte")
+        text: root.menu_suporte
 
         IconLeftWidget:
 
@@ -121,8 +118,7 @@
 
     # PERFIL
     OneLineIconListItem:
-
-        text: app.tr("menu_perfil")
+        text: root.menu_perfil
 
         on_release:
             root.abrir_perfil()
@@ -137,8 +133,7 @@
 
     # CONFIGURAÇÕES
     OneLineIconListItem:
-
-        text: app.tr("menu_configuracoes")
+        text: root.menu_configuracoes
 
         on_release:
             app.root.get_screen("home").fechar_menu()
@@ -150,9 +145,10 @@
 
     # SAIR
     OneLineIconListItem:
+        text: root.menu_sair
 
-        text: app.tr("menu_sair")
+        on_release:
+            root.sair()
 
         IconLeftWidget:
-
             icon: "logout"

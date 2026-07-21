@@ -8,9 +8,8 @@
         orientation: "vertical"
 
         MDTopAppBar:
-            title: app.tr("configuracoes")
+            title: root.config_titulo
             elevation: 0
-
             md_bg_color: app.theme_cls.bg_normal
 
             left_action_items:
@@ -31,6 +30,7 @@
                     size_hint_y: None
                     height: dp(8)
 
+                # IDIOMA
                 MDCard:
                     radius: [18]
                     elevation: 3
@@ -54,12 +54,12 @@
                             width: dp(30)
 
                         MDLabel:
-                            text: app.tr("config_linguagem")
+                            text: root.config_linguagem
 
                             font_style: "Subtitle1"
 
                         MDLabel:
-                            text: root.idioma
+                            text: root.texto_idioma
 
                             adaptive_width: True
 
@@ -73,6 +73,7 @@
                             size_hint_x: None
                             width: dp(25)
 
+                # TEMA
                 MDCard:
                     radius: [18]
                     elevation: 3
@@ -96,12 +97,12 @@
                             width: dp(30)
 
                         MDLabel:
-                            text: app.tr("config_tema")
+                            text: root.config_tema
 
                             font_style: "Subtitle1"
 
                         MDLabel:
-                            text: root.tema
+                            text: root.texto_tema
 
                             adaptive_width: True
 

@@ -8,7 +8,6 @@
     FloatLayout:
 
         # CONTEÚDO PRINCIPAL
-
         MDBoxLayout:
             orientation: "vertical"
             size_hint: 1, 1
@@ -42,15 +41,13 @@
 
                         spacing: dp(18)
 
-
                         MDLabel:
-                            text: f"Olá, {root.nome_usuario}!"
+                            text: root.ola + ", " + root.nome_usuario + "!"
                             font_style: "H4"
                             bold: True
                             adaptive_height: True
 
                         MDSeparator:
-
 
                         MDCard:
                             size_hint_y: None
@@ -67,7 +64,6 @@
                         MDSeparator:
 
                         # CARD BAGAGENS
-
                         MDCard:
 
                             size_hint_y: None
@@ -86,22 +82,21 @@
                                 spacing: dp(6)
 
                                 MDLabel:
-                                    text: app.tr('home_bagagens_titulo')
+                                    text: root.home_bagagens_titulo
                                     font_style: "H6"
                                     bold: True
                                     adaptive_height: True
 
                                 MDLabel:
-                                    text: app.tr('home_bagagens_texto')
+                                    text: root.home_bagagens_texto
                                     adaptive_height: True
                                     theme_text_color: "Secondary"
-
                                     text_size: self.width, None
 
                                 Widget:
 
                                 MDRaisedButton:
-                                    text: app.tr('home_botao_bagagem')
+                                    text: root.home_botao_bagagem
 
                                     size_hint: None, None
 
@@ -111,7 +106,6 @@
                                         root.abrir_bags()
 
                         # CARD SUPORTE
-
                         MDCard:
 
                             size_hint_y: None
@@ -130,27 +124,21 @@
                                 spacing: dp(6)
 
                                 MDLabel:
-                                    text: app.tr('home_suporte_titulo')
-
+                                    text: root.home_suporte_titulo
                                     font_style: "H6"
-
                                     bold: True
-
                                     adaptive_height: True
 
                                 MDLabel:
-                                    text: app.tr('home_suporte_texto')
-
+                                    text: root.home_suporte_texto
                                     adaptive_height: True
-
                                     theme_text_color: "Secondary"
-
                                     text_size: self.width, None
 
                                 Widget:
 
                                 MDRaisedButton:
-                                    text: app.tr('home_botao_suporte')
+                                    text: root.home_botao_suporte
 
                                     size_hint: None, None
 
@@ -164,7 +152,6 @@
                             height: dp(20)
 
         # OVERLAY ESCURO
-
         Button:
             id: overlay
 
@@ -184,7 +171,6 @@
                 root.fechar_menu()
 
         # DRAWER
-
         Drawer:
             id: drawer
 

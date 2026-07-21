@@ -4,7 +4,6 @@
 <RegisterScreen>:
 
     MDBoxLayout:
-
         orientation: "vertical"
 
         padding: dp(40)
@@ -14,8 +13,7 @@
         Widget:
 
         MDLabel:
-
-            text: app.tr("cadastro_titulo")
+            text: root.titulo
 
             halign: "center"
 
@@ -23,14 +21,13 @@
 
         MDLabel:
 
-            text: app.tr("cadastro_subtitulo")
+            text: root.subtitulo
 
             halign: "center"
 
             theme_text_color: "Secondary"
 
         MDCard:
-
             orientation: "vertical"
 
             padding: dp(25)
@@ -46,10 +43,9 @@
             elevation: 8
 
             MDTextField:
-
                 id: name
 
-                hint_text: app.tr("campo_usuario")
+                hint_text: root.campo_usuario
 
                 icon_left: "account"
 
@@ -57,10 +53,9 @@
                     root.validar_campos()
 
             MDTextField:
-
                 id: email
 
-                hint_text: app.tr("campo_email")
+                hint_text: root.campo_email
 
                 icon_left: "email"
 
@@ -68,16 +63,14 @@
                     root.validar_campos()
 
             MDBoxLayout:
-
                 adaptive_height: True
 
                 spacing: dp(5)
 
                 MDTextField:
-
                     id: password
 
-                    hint_text: app.tr("campo_senha")
+                    hint_text: root.campo_senha
 
                     password: True
 
@@ -87,7 +80,6 @@
                         root.validar_campos()
 
                 MDIconButton:
-
                     id: btn_password
 
                     icon: "eye-off"
@@ -100,16 +92,14 @@
                         self.icon = "eye" if self.icon == "eye-off" else "eye-off"
 
             MDBoxLayout:
-
                 adaptive_height: True
 
                 spacing: dp(5)
 
                 MDTextField:
-
                     id: confirm_password
 
-                    hint_text: app.tr("campo_confirmar_senha")
+                    hint_text: root.campo_confirmar_senha
 
                     password: True
 
@@ -119,7 +109,6 @@
                         root.validar_campos()
 
                 MDIconButton:
-
                     id: btn_confirm
 
                     icon: "eye-off"
@@ -132,10 +121,9 @@
                         self.icon = "eye" if self.icon == "eye-off" else "eye-off"
 
             MDRaisedButton:
-
                 id: register_button
 
-                text: app.tr("cadastro_botao")
+                text: root.botao_cadastrar
 
                 size_hint_x: 1
 
@@ -147,8 +135,7 @@
                     root.cadastrar()
 
         MDTextButton:
-
-            text: app.tr("ja_tenho_conta")
+            text: root.ja_tenho_conta
 
             pos_hint:
                 {"center_x": .5}
