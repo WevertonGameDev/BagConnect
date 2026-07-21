@@ -26,6 +26,12 @@ class ProfileScreen(MDScreen):
     email = StringProperty("")
     cpf = StringProperty("")
 
+
+    titulo = StringProperty("")
+    status_conexao = StringProperty("")
+    botao_conexao = StringProperty("")
+
+
     foto = StringProperty(
         "assets/images/avatar_default.png"
     )
@@ -36,7 +42,19 @@ class ProfileScreen(MDScreen):
     botao_salvar = None
 
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        app = App.get_running_app()
+
+        if app:
+            app.bind(
+                idioma_evento=self._idioma_alterado
+            )
+
+
     def on_enter(self):
+        self.atualizar_textos()
         user = Session.obter_usuario()
 
         if not user:
@@ -47,6 +65,41 @@ class ProfileScreen(MDScreen):
         self.cpf = user.cpf if user.cpf else ""
 
         self.verificar_passageiro()
+
+
+    def _idioma_alterado(self, *args):
+
+        self.atualizar_textos()
+
+
+    def atualizar_textos(self):
+
+        app = App.get_running_app()
+
+        self.titulo = app.tr(
+            "perfil_titulo"
+        )
+
+
+        if self.conectado:
+
+            self.status_conexao = app.tr(
+                "perfil_conectado"
+            )
+
+            self.botao_conexao = app.tr(
+                "perfil_desconectar"
+            )
+
+        else:
+
+            self.status_conexao = app.tr(
+                "perfil_nao_conectado"
+            )
+
+            self.botao_conexao = app.tr(
+                "perfil_conectar"
+            )
 
 
     def verificar_passageiro(self):
@@ -135,14 +188,13 @@ class ProfileScreen(MDScreen):
 
     def verificar_alteracoes(self, *args):
 
-        # Validação visual do Email 
         if self.validar_email(self.campo_email.text.strip()):
             self.campo_email.error = False
 
         else:
             self.campo_email.error = True
 
-        # Validação visual do CPF 
+
         cpf = (
             self.campo_cpf.text
             .replace(".", "")
@@ -157,7 +209,6 @@ class ProfileScreen(MDScreen):
             self.campo_cpf.error = True
 
 
-        # Verifica alterações 
         alterado = (
             self.campo_usuario.text.strip() != self.usuario or
             self.campo_email.text.strip() != self.email or

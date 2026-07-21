@@ -1,5 +1,7 @@
+from kivy.app import App
+from kivy.properties import ListProperty, StringProperty
+
 from kivymd.uix.screen import MDScreen
-from kivy.properties import ListProperty
 
 from models.ticket import Ticket
 
@@ -13,8 +15,42 @@ class SupportScreen(MDScreen):
 
     tickets = ListProperty([])
 
+    titulo = StringProperty("")
+    novo_ticket = StringProperty("")
+
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+        app = App.get_running_app()
+
+        if app:
+            app.bind(
+                idioma_evento=self._idioma_alterado
+            )
+
+
     def on_pre_enter(self, *args):
+        self.atualizar_textos()
         self.carregar_tickets()
+
+
+    def _idioma_alterado(self, *args):
+        self.atualizar_textos()
+
+
+    def atualizar_textos(self):
+
+        app = App.get_running_app()
+
+        self.titulo = app.tr(
+            "menu_suporte"
+        )
+
+        self.novo_ticket = app.tr(
+            "suporte_novo_ticket"
+        )
+
 
     def carregar_tickets(self):
         """
@@ -26,6 +62,7 @@ class SupportScreen(MDScreen):
         Por enquanto apenas mantém a lista em memória.
         """
         self.tickets = Ticket.lista
+
 
     def abrir_novo_ticket(self):
         self.manager.current = "new_ticket"
@@ -40,6 +77,7 @@ class SupportScreen(MDScreen):
         ChatScreen.ticket_atual = ticket
 
         self.manager.current = "chat"
+
 
     def atualizar_lista(self):
         self.carregar_tickets()

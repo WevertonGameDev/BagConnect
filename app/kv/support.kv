@@ -9,7 +9,7 @@
 
         MDTopAppBar:
 
-            title: app.tr("menu_suporte", "Suporte")
+            title: root.titulo
 
             elevation: 0
 
@@ -26,11 +26,12 @@
 
             MDRaisedButton:
 
-                text: app.tr("suporte_novo_ticket", "Novo Ticket")
+                text: root.novo_ticket
 
                 icon: "plus"
 
-                pos_hint: {"center_x": .5}
+                pos_hint:
+                    {"center_x": .5}
 
                 on_release:
                     root.abrir_novo_ticket()
