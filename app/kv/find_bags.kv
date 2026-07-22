@@ -1,157 +1,190 @@
-#:import dp kivy.metrics.dp
+# app/kv/find_bags.kv
 
-<FindBagsScreen>
-
-    md_bg_color: app.theme_cls.bg_normal
-
+<FindBagsScreen>:
     MDBoxLayout:
-        orientation: "vertical"
+        orientation: 'vertical'
+        padding: dp(16)
+        spacing: dp(12)
 
-        MDTopAppBar:
-            title: root.titulo
+        # Botão Superior com a Setinha de Voltar
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(48)
 
-            elevation: 0
+            MDIconButton:
+                icon: "arrow-left"
+                on_release: app.root.current = "home"
 
-            left_action_items:
-                [["arrow-left", lambda x: root.voltar()]]
+            Widget: # Espaçador para manter o botão alinhado à esquerda
 
-            right_action_items:
-                [["history", lambda x: root.abrir_historico()]]
+        MDLabel:
+            text: "Encontrar Bagagem"
+            font_style: "H5"
+            bold: True
+            size_hint_y: None
+            height: self.texture_size[1]
 
-            md_bg_color: app.theme_cls.bg_normal
+        # Campos de Busca
+        MDTextField:
+            id: cpf_input
+            hint_text: "CPF (ex: 123.456.789-00)"
+            icon_left: "card-account-details"
+            size_hint_y: None
+            height: dp(60)
 
+        MDTextField:
+            id: codigo_input
+            hint_text: "Código da Bagagem (ex: BAG-2026-001)"
+            icon_left: "barcode-scan"
+            size_hint_y: None
+            height: dp(60)
+
+        MDRaisedButton:
+            text: "Buscar"
+            icon: "magnify"
+            size_hint_x: 1
+            on_release: root.buscar_bagagem()
+
+        # Mensagem de Erro
+        MDLabel:
+            id: lbl_mensagem_erro
+            text: ""
+            theme_text_color: "Error"
+            halign: "center"
+            size_hint_y: None
+            height: self.texture_size[1]
+
+        # Card de Resultado (Inicia invisível/desativado)
         ScrollView:
-
-            AnchorLayout:
-                anchor_x: "center"
-                anchor_y: "top"
-
+            MDCard:
+                id: card_resultado
+                orientation: 'vertical'
+                padding: dp(16)
+                spacing: dp(8)
+                radius: [12,]
+                elevation: 2
                 size_hint_y: None
-                height: content.height
+                height: self.minimum_height
+                opacity: 0
+                disabled: True
 
                 MDBoxLayout:
-                    id: content
+                    size_hint_y: None
+                    height: dp(30)
+                    spacing: dp(8)
 
-                    orientation: "vertical"
-
-                    adaptive_height: True
-
-                    size_hint_x: None
-                    width: min(root.width - dp(40), dp(560))
-
-                    padding: dp(20)
-
-                    spacing: dp(18)
-
-                    MDSeparator:
+                    MDIcon:
+                        icon: "bag-suitcase"
+                        theme_text_color: "Custom"
+                        text_color: 0, 0.6, 0.2, 1
 
                     MDLabel:
-                        text: root.cpf_titulo
-
+                        text: "Bag encontrada"
+                        font_style: "Subtitle1"
                         bold: True
-                        adaptive_height: True
 
-                    MDTextField:
-                        id: cpf
+                MDSeparator:
 
-                        hint_text: root.cpf_hint
+                # Badge de Status Em Destaque
+                MDLabel:
+                    id: lbl_status
+                    text: "🟢 Status: Em transporte"
+                    theme_text_color: "Custom"
+                    text_color: 0.1, 0.7, 0.3, 1
+                    bold: True
+                    size_hint_y: None
+                    height: dp(24)
 
-                        helper_text: root.cpf_helper
+                # Informações do Passageiro e Voo
+                MDLabel:
+                    id: lbl_codigo
+                    text: ""
+                    font_style: "Body2"
+                    size_hint_y: None
+                    height: dp(20)
 
-                        helper_text_mode: "on_focus"
+                MDLabel:
+                    id: lbl_passageiro
+                    text: ""
+                    font_style: "Body2"
+                    size_hint_y: None
+                    height: dp(20)
+
+                MDLabel:
+                    id: lbl_cpf
+                    text: ""
+                    font_style: "Body2"
+                    size_hint_y: None
+                    height: dp(20)
+
+                MDLabel:
+                    id: lbl_companhia
+                    text: ""
+                    font_style: "Body2"
+                    size_hint_y: None
+                    height: dp(20)
+
+                MDLabel:
+                    id: lbl_rota
+                    text: ""
+                    font_style: "Body2"
+                    bold: True
+                    size_hint_y: None
+                    height: dp(20)
+
+                MDLabel:
+                    id: lbl_despacho
+                    text: ""
+                    font_style: "Caption"
+                    theme_text_color: "Hint"
+                    size_hint_y: None
+                    height: dp(18)
+
+                MDSeparator:
+
+                # Rastreamento e Tempo
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: dp(24)
+                    spacing: dp(6)
+
+                    MDIcon:
+                        icon: "map-marker"
+                        size_hint_x: None
+                        width: dp(20)
 
                     MDLabel:
+                        id: lbl_localizacao
+                        text: ""
+                        font_style: "Caption"
 
-                        text: root.codigo_titulo
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: dp(24)
+                    spacing: dp(6)
 
-                        bold: True
-                        adaptive_height: True
-
-                    MDTextField:
-                        id: codigo
-
-                        hint_text: root.codigo_hint
-
-                        helper_text: root.codigo_helper
-
-                        helper_text_mode: "on_focus"
-
-                    MDRaisedButton:
-                        text: root.botao_consultar
-
-                        size_hint_x: 1
-
-                        on_release:
-                            root.consultar_bagagem()
-
-                    MDSeparator:
+                    MDIcon:
+                        icon: "clock-outline"
+                        size_hint_x: None
+                        width: dp(20)
 
                     MDLabel:
-                        text: root.resultado_titulo
+                        id: lbl_atualizacao
+                        text: ""
+                        font_style: "Caption"
 
-                        font_style: "H6"
+                MDBoxLayout:
+                    size_hint_y: None
+                    height: dp(24)
+                    spacing: dp(6)
 
+                    MDIcon:
+                        icon: "run-fast"
+                        size_hint_x: None
+                        width: dp(20)
+
+                    MDLabel:
+                        id: lbl_previsao
+                        text: ""
+                        font_style: "Caption"
                         bold: True
-
-                        adaptive_height: True
-
-                    MDCard:
-                        id: resultado_card
-
-                        orientation: "vertical"
-
-                        adaptive_height: True
-
-                        size_hint_y: None
-
-                        padding: dp(18)
-
-                        spacing: dp(10)
-
-                        radius: [18]
-
-                        elevation: 4
-
-                        opacity: 0
-
-                        MDLabel:
-                            id: bag_codigo
-
-                            text: ""
-
-                            bold: True
-
-                            adaptive_height: True
-
-                        MDSeparator:
-
-                        MDLabel:
-                            text: root.status_label
-
-                            bold: True
-
-                            adaptive_height: True
-
-                        MDLabel:
-                            id: bag_status
-
-                            text: ""
-
-                            adaptive_height: True
-
-                            theme_text_color: "Secondary"
-
-                        MDSeparator:
-
-                        MDLabel:
-                            id: bag_descricao
-
-                            text: ""
-
-                            adaptive_height: True
-
-                            theme_text_color: "Secondary"
-
-                    Widget:
-                        size_hint_y: None
-                        height: dp(20)

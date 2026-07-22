@@ -1,188 +1,39 @@
-from kivy.app import App
-from kivy.properties import StringProperty
+# app/screens/find_bags.py
 
-from kivymd.uix.screen import MDScreen
-from kivy.animation import Animation
-
-from kivymd.uix.dialog import MDDialog
-from kivymd.uix.button import MDFlatButton
-
+from kivy.uix.screenmanager import Screen
 from services.bag_service import BagService
 
+class FindBagsScreen(Screen):
 
-class FindBagsScreen(MDScreen):
-    dialog = None
+    def buscar_bagagem(self):
+        # Captura os dados dos campos de texto da tela
+        cpf = self.ids.cpf_input.text
+        codigo = self.ids.codigo_input.text
 
-    titulo = StringProperty("")
+        # Consulta a camada de serviço
+        bagagem = BagService.buscar_bagagem_demonstracao(cpf, codigo)
 
-    cpf_titulo = StringProperty("")
-    cpf_hint = StringProperty("")
-    cpf_helper = StringProperty("")
-
-    codigo_titulo = StringProperty("")
-    codigo_hint = StringProperty("")
-    codigo_helper = StringProperty("")
-
-    botao_consultar = StringProperty("")
-
-    resultado_titulo = StringProperty("")
-    status_label = StringProperty("")
-
-
-    def __init__(self, **kwargs):
-
-        super().__init__(**kwargs)
-
-        app = App.get_running_app()
-
-        if app:
-
-            app.bind(
-                idioma_evento=self._idioma_alterado
-            )
-
-
-    def on_pre_enter(self):
-
-        self.atualizar_textos()
-
-
-    def _idioma_alterado(self, *args):
-
-        self.atualizar_textos()
-
-
-    def atualizar_textos(self):
-        app = App.get_running_app()
-
-        self.titulo = app.tr("find_bags_titulo")
-        self.cpf_titulo = app.tr("find_bags_cpf")
-        self.cpf_hint = app.tr("find_bags_cpf_hint")
-        self.cpf_helper = app.tr("find_bags_cpf_helper")
-        self.codigo_titulo = app.tr("find_bags_codigo")
-        self.codigo_hint = app.tr("find_bags_codigo_hint")
-        self.codigo_helper = app.tr("find_bags_codigo_helper")
-        self.botao_consultar = app.tr("find_bags_botao_consultar")
-        self.resultado_titulo = app.tr("find_bags_encontrada")
-        self.status_label = app.tr("find_bags_status")
-
-
-    # BOTÕES
-    def voltar(self):
-        self.manager.current = "home"
-
-
-    def abrir_historico(self):
-        print("Abrir histórico")
-
-
-    # CONSULTA
-    def consultar_bagagem(self):
-
-        cpf = self.ids.cpf.text.strip()
-        codigo = self.ids.codigo.text.strip()
-
-        if not cpf or not codigo:
-            self.mostrar_dialogo(
-
-                App.get_running_app().tr(
-                    "find_bags_atencao"
-                ),
-
-                App.get_running_app().tr(
-                    "find_bags_preencha_campos"
-                )
-            )
-            return
-
-        bagagem = BagService.buscar_bagagem(
-            cpf,
-            codigo
-        )
-
-        if bagagem is None:
-
-            self.ocultar_resultado()
-
-            self.mostrar_dialogo(
-
-                App.get_running_app().tr(
-                    "find_bags_nao_encontrada"
-                ),
-
-                App.get_running_app().tr(
-                    "find_bags_nao_encontrada_texto"
-                )
-            )
-
-            return
-
-        self.mostrar_resultado(bagagem)
-
-
-    # RESULTADO
-    def mostrar_resultado(self, bagagem):
-
-        self.ids.bag_codigo.text = (
-            f"# Bag {bagagem['codigo']}"
-        )
-
-        self.ids.bag_status.text = (
-
-            f"{App.get_running_app().tr('find_bags_status_prefix')} "
-            f"{bagagem['status']}"
-
-        )
-
-        self.ids.bag_descricao.text = (
-
-            App.get_running_app().tr(
-                "find_bags_resultado_sucesso"
-            )
-
-        )
-
-        card = self.ids.resultado_card
-
-        card.disabled = False
-
-        Animation(
-            opacity=1,
-            d=.25
-        ).start(card)
-
-
-    def ocultar_resultado(self):
-
-        card = self.ids.resultado_card
-
-        Animation(
-            opacity=0,
-            d=.25
-        ).start(card)
-
-        card.disabled = True
-
-
-    # DIALOG
-    def mostrar_dialogo(
-        self,
-        titulo,
-        texto
-    ):
-
-        if self.dialog:
-            self.dialog.dismiss()
-
-        self.dialog = MDDialog(
-            title=titulo,
-            text=texto,
-            buttons=[
-                MDFlatButton(
-                    text=App.get_running_app().tr("find_bags_ok"),
-                    on_release=lambda x: self.dialog.dismiss()
-                )
-            ]
-        )
-
-        self.dialog.open()
+        if bagagem:
+            # Oculta mensagem de erro se houver
+            self.ids.lbl_mensagem_erro.text = ""
+            
+            # Preenche o card com os dados retornados
+            self.ids.lbl_status.text = f"🟢 Status: {bagagem['status']}"
+            self.ids.lbl_codigo.text = f"Código: {bagagem['codigo']}"
+            self.ids.lbl_passageiro.text = f"Passageiro: {bagagem['passageiro']}"
+            self.ids.lbl_cpf.text = f"CPF: {bagagem['cpf']}"
+            self.ids.lbl_companhia.text = f"Companhia: {bagagem['companhia']}"
+            self.ids.lbl_rota.text = f"Rota: {bagagem['origem']} ➔ {bagagem['destino']}"
+            self.ids.lbl_despacho.text = f"Despacho: {bagagem['data_despacho']} às {bagagem['horario_despacho']}"
+            self.ids.lbl_localizacao.text = f"Localização: {bagagem['localizacao']}"
+            self.ids.lbl_atualizacao.text = f"Última atualização: {bagagem['ultima_atualizacao']}"
+            self.ids.lbl_previsao.text = f"Previsão na esteira: {bagagem['previsao_esteira']}"
+            
+            # Exibe o card de resultado
+            self.ids.card_resultado.opacity = 1
+            self.ids.card_resultado.disabled = False
+        else:
+            # Oculta o card e exibe a mensagem de erro amigável
+            self.ids.card_resultado.opacity = 0
+            self.ids.card_resultado.disabled = True
+            self.ids.lbl_mensagem_erro.text = "Bagagem não encontrada. Verifique o CPF e o código informado."
