@@ -50,6 +50,15 @@ class Drawer(MDBoxLayout):
         App.get_running_app().root.current = "profile"
 
 
+    def abrir_bagagens(self):
+        App.get_running_app().root.current = "find_bags"
+
+
+    def abrir_suporte(self):
+        App.get_running_app().root.current = "support"
+
+
+
     def sair(self):
         # Limpa a sessão
         Session.salvar_usuario(None)
