@@ -63,39 +63,54 @@ BagConnect/
 │   │   ├── idioma.py
 │   │   ├── manager.py
 │   │   ├── session.py
+│   │   ├── system.py
 │   │   └── theme.py
 │   │
 │   ├── data/
 │   │   └── bagconnect.db
 │   │
 │   ├── kv/
+│   │   ├── chat.kv
 │   │   ├── find_bags.kv
 │   │   ├── home.kv
 │   │   ├── login.kv
+│   │   ├── new_ticket.kv
 │   │   ├── profile.kv
-│   │   └── register.kv
+│   │   ├── register.kv
+│   │   ├── settings.kv
+│   │   └── support.kv
 │   │
 │   ├── models/
 │   │   ├── bag.py
+│   │   ├── mensagem.py
 │   │   ├── passenger.py
+│   │   ├── ticket.py
 │   │   └── user.py
 │   │
 │   ├── screens/
+│   │   ├── chat.py
 │   │   ├── find_bags.py
 │   │   ├── home.py
 │   │   ├── login.py
+│   │   ├── new_ticket.py
 │   │   ├── profile.py
-│   │   └── register.py
+│   │   ├── register.py
+│   │   ├── settings.py
+│   │   └── support.py
 │   │
 │   ├── services/
 │   │   ├── auth_service.py
 │   │   ├── bag_service.py
 │   │   ├── database.py
+│   │   ├── theme_service.py
+│   │   ├── ticket_service.py
 │   │   └── user_service.py
 │   │
 │   ├── widgets/
 │   │   ├── drawer.kv
-│   │   └── drawer.py
+│   │   ├── drawer.py
+│   │   ├── ticket_card.kv
+│   │   └── ticket_card.py
 │   │
 │   └── main.py
 │
